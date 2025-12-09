@@ -111,10 +111,10 @@ export default function UserLoginPage() {
               fontWeight: '500',
               fontSize: '14px'
             }}>
-              Email
+              Email ou Username
             </label>
             <input
-              type="email"
+              type="text"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -130,7 +130,7 @@ export default function UserLoginPage() {
                 outline: 'none',
                 transition: 'border-color 0.3s'
               }}
-              placeholder="user@email.com"
+              placeholder="user@email.com ou username"
               onFocus={(e) => e.target.style.borderColor = 'rgba(98,0,238,0.5)'}
               onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
             />
