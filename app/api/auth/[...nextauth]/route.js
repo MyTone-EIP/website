@@ -1,7 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import { getUserByEmail, getAdminByUsername } from "@/lib/db";
+import { getUserByEmailOrUsername, getAdminByUsername } from "@/lib/db";
 
 const handler = NextAuth({
   providers: [
@@ -22,7 +22,7 @@ const handler = NextAuth({
         if (credentials.userType === 'admin') {
           user = await getAdminByUsername(credentials.identifier);
         } else {
-          user = await getUserByEmail(credentials.identifier);
+          user = await getUserByEmailOrUsername(credentials.identifier);
         }
 
         if (!user) {
