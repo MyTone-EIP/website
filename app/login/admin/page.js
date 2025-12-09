@@ -53,7 +53,7 @@ export default function AdminLoginPage() {
         transform: 'translate(-50%, -50%)',
         width: '600px',
         height: '600px',
-        background: 'radial-gradient(circle, rgba(255,142,83,0.15) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(98,0,238,0.15) 0%, transparent 70%)',
         filter: 'blur(80px)',
         zIndex: 0
       }} />
@@ -63,7 +63,7 @@ export default function AdminLoginPage() {
         backdropFilter: 'blur(20px)',
         padding: '50px',
         borderRadius: '24px',
-        border: '1px solid rgba(255,142,83,0.2)',
+        border: '1px solid rgba(98,0,238,0.2)',
         width: '100%',
         maxWidth: '440px',
         position: 'relative',
@@ -74,7 +74,7 @@ export default function AdminLoginPage() {
           <div style={{
             fontSize: '36px',
             fontWeight: '700',
-            background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%)',
+            background: 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
@@ -89,12 +89,12 @@ export default function AdminLoginPage() {
 
         {error && (
           <div style={{
-            background: 'rgba(255,107,107,0.1)',
-            color: '#FF6B6B',
+            background: 'rgba(239,68,68,0.1)',
+            color: '#EF4444',
             padding: '14px',
             borderRadius: '12px',
             marginBottom: '25px',
-            border: '1px solid rgba(255,107,107,0.3)',
+            border: '1px solid rgba(239,68,68,0.3)',
             fontSize: '14px',
             textAlign: 'center'
           }}>
@@ -131,7 +131,7 @@ export default function AdminLoginPage() {
                 transition: 'border-color 0.3s'
               }}
               placeholder="admin"
-              onFocus={(e) => e.target.style.borderColor = 'rgba(255,142,83,0.5)'}
+              onFocus={(e) => e.target.style.borderColor = 'rgba(98,0,238,0.5)'}
               onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
             />
           </div>
@@ -164,7 +164,7 @@ export default function AdminLoginPage() {
                 transition: 'border-color 0.3s'
               }}
               placeholder="••••••••"
-              onFocus={(e) => e.target.style.borderColor = 'rgba(255,142,83,0.5)'}
+              onFocus={(e) => e.target.style.borderColor = 'rgba(98,0,238,0.5)'}
               onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
             />
           </div>
@@ -175,7 +175,7 @@ export default function AdminLoginPage() {
             style={{
               width: '100%',
               padding: '16px',
-              background: loading ? 'rgba(100,100,100,0.5)' : 'linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%)',
+              background: loading ? 'rgba(100,100,100,0.5)' : 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
               color: 'white',
               border: 'none',
               borderRadius: '12px',
@@ -183,7 +183,7 @@ export default function AdminLoginPage() {
               fontWeight: '600',
               cursor: loading ? 'not-allowed' : 'pointer',
               transition: 'all 0.3s',
-              boxShadow: loading ? 'none' : '0 4px 15px rgba(255,142,83,0.3)'
+              boxShadow: loading ? 'none' : '0 4px 15px rgba(98,0,238,0.3)'
             }}
           >
             {loading ? 'Connexion...' : 'Se connecter'}
@@ -194,7 +194,7 @@ export default function AdminLoginPage() {
           <a 
             href="/" 
             style={{ 
-              color: '#FF8E53', 
+              color: '#9D4EDD', 
               textDecoration: 'none',
               fontSize: '14px',
               fontWeight: '500'

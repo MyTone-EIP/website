@@ -19,12 +19,9 @@ const handler = NextAuth({
 
         let user = null;
         
-        // Vérifier selon le type d'utilisateur
         if (credentials.userType === 'admin') {
-          // Connexion admin avec username
           user = await getAdminByUsername(credentials.identifier);
         } else {
-          // Connexion user avec email
           user = await getUserByEmail(credentials.identifier);
         }
 
@@ -32,20 +29,18 @@ const handler = NextAuth({
           throw new Error("Aucun utilisateur trouvé");
         }
 
-        // Vérifier le mot de passe hashé
         const isValid = await bcrypt.compare(credentials.password, user.password);
 
         if (!isValid) {
           throw new Error("Mot de passe incorrect");
         }
 
-        // Retourner l'utilisateur avec son rôle
         return {
           id: user.id,
           email: user.email || null,
           name: user.name || user.username,
           username: user.username || null,
-          role: user.role, // 'admin' ou 'user'
+          role: user.role,
         };
       }
     })

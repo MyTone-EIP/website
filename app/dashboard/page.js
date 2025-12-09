@@ -68,7 +68,7 @@ export default function DashboardPage() {
         <div style={{
           fontSize: '24px',
           fontWeight: '700',
-          background: 'linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%)',
+          background: 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text'
@@ -97,9 +97,9 @@ export default function DashboardPage() {
             onClick={() => signOut({ callbackUrl: '/' })}
             style={{
               padding: '8px 16px',
-              background: 'rgba(255,107,107,0.1)',
-              color: '#FF6B6B',
-              border: '1px solid rgba(255,107,107,0.3)',
+              background: 'rgba(239,68,68,0.1)',
+              color: '#EF4444',
+              border: '1px solid rgba(239,68,68,0.3)',
               borderRadius: '8px',
               cursor: 'pointer',
               fontSize: '14px'
@@ -113,7 +113,7 @@ export default function DashboardPage() {
       <div style={{ padding: '60px 40px', maxWidth: '1200px', margin: '0 auto' }}>
         <div style={{
           background: 'rgba(20,20,20,0.6)',
-          border: '1px solid rgba(255,107,107,0.2)',
+          border: '1px solid rgba(98,0,238,0.2)',
           padding: '40px',
           borderRadius: '20px',
           marginBottom: '40px',
@@ -159,7 +159,7 @@ export default function DashboardPage() {
                   style={{
                     padding: '30px',
                     background: 'rgba(30,30,30,0.8)',
-                    border: '1px solid rgba(255,107,107,0.2)',
+                    border: '1px solid rgba(98,0,238,0.2)',
                     borderRadius: '16px',
                     transition: 'transform 0.2s, border-color 0.2s'
                   }}
