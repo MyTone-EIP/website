@@ -356,6 +356,10 @@ export default function Home() {
         </p>
         <p style={{ margin: '20px 0 0 0', color: '#444', fontSize: '13px' }}>
           © 2025 MyTone - Projet EIP
+          {' · '}
+          <a href="/cgu" style={{ color: '#9D4EDD', textDecoration: 'none' }}>
+            {t.cguTitle || 'CGU'}
+          </a>
         </p>
       </footer>
     </div>
