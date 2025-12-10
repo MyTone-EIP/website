@@ -1,9 +1,30 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 export default function Home() {
   const router = useRouter();
+  const [downloading, setDownloading] = useState(false);
+
+  const handleDownload = async () => {
+    setDownloading(true);
+    try {
+      const response = await fetch('/api/apk');
+      const data = await response.json();
+      
+      if (data.url) {
+        // Ouvrir l'URL de téléchargement dans un nouvel onglet
+        window.open(data.url, '_blank');
+      } else {
+        alert('APK non disponible pour le moment');
+      }
+    } catch (error) {
+      alert('Erreur lors du téléchargement');
+    } finally {
+      setDownloading(false);
+    }
+  };
 
   return (
     <div style={{ 
@@ -136,25 +157,25 @@ export default function Home() {
           <p style={{ color: '#bbb', marginBottom: '35px', fontSize: '16px' }}>
             Version Android (APK) - Transformez votre voix en musique dès maintenant
           </p>
-          <a
-            href="/app-release.apk"
-            download
+          <button
+            onClick={handleDownload}
+            disabled={downloading}
             style={{
               display: 'inline-block',
               padding: '18px 50px',
-              background: 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
+              background: downloading ? 'rgba(100,100,100,0.5)' : 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
               color: 'white',
               borderRadius: '30px',
-              textDecoration: 'none',
               fontWeight: '700',
               fontSize: '18px',
-              boxShadow: '0 8px 25px rgba(98,0,238,0.4)',
+              boxShadow: downloading ? 'none' : '0 8px 25px rgba(98,0,238,0.4)',
               transition: 'all 0.3s',
-              border: 'none'
+              border: 'none',
+              cursor: downloading ? 'not-allowed' : 'pointer'
             }}
           >
-            ⬇ Télécharger l'APK
-          </a>
+            {downloading ? '⏳ Chargement...' : '⬇ Télécharger l\'APK'}
+          </button>
           <p style={{ 
             color: '#888', 
             marginTop: '25px', 

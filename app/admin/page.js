@@ -4,12 +4,148 @@ import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
 
+// Composant pour l'upload APK
+function ApkUploadSection() {
+  const [file, setFile] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadMessage, setUploadMessage] = useState('');
+
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files?.[0];
+    if (selectedFile) {
+      if (!selectedFile.name.endsWith('.apk')) {
+        setUploadMessage('❌ Le fichier doit être un APK');
+        setFile(null);
+        return;
+      }
+      setFile(selectedFile);
+      setUploadMessage('');
+    }
+  };
+
+  const handleUpload = async () => {
+    if (!file) {
+      setUploadMessage('❌ Veuillez sélectionner un fichier APK');
+      return;
+    }
+
+    setUploading(true);
+    setUploadMessage('');
+
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+
+      const response = await fetch('/api/apk', {
+        method: 'POST',
+        body: formData,
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setUploadMessage('✅ APK uploadé avec succès !');
+        setFile(null);
+        // Reset l'input file
+        const fileInput = document.getElementById('apk-file-input');
+        if (fileInput) fileInput.value = '';
+      } else {
+        setUploadMessage(`❌ ${data.error || 'Erreur lors de l\'upload'}`);
+      }
+    } catch (error) {
+      setUploadMessage('❌ Erreur de connexion au serveur');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  return (
+    <div>
+      {uploadMessage && (
+        <div style={{
+          padding: '14px',
+          borderRadius: '12px',
+          marginBottom: '20px',
+          background: uploadMessage.includes('✅') ? 'rgba(34,197,94,0.1)' : 'rgba(239,68,68,0.1)',
+          color: uploadMessage.includes('✅') ? '#22c55e' : '#EF4444',
+          border: `1px solid ${uploadMessage.includes('✅') ? 'rgba(34,197,94,0.3)' : 'rgba(239,68,68,0.3)'}`,
+          fontSize: '14px',
+          textAlign: 'center'
+        }}>
+          {uploadMessage}
+        </div>
+      )}
+
+      <div style={{
+        display: 'flex',
+        gap: '15px',
+        alignItems: 'center',
+        padding: '30px',
+        background: 'rgba(30,30,30,0.6)',
+        borderRadius: '16px',
+        border: '1px solid rgba(255,255,255,0.1)'
+      }}>
+        <input
+          id="apk-file-input"
+          type="file"
+          accept=".apk"
+          onChange={handleFileChange}
+          style={{
+            flex: 1,
+            padding: '12px',
+            background: 'rgba(20,20,20,0.8)',
+            border: '1px solid rgba(255,255,255,0.1)',
+            borderRadius: '10px',
+            color: 'white',
+            fontSize: '14px',
+            cursor: 'pointer'
+          }}
+        />
+        <button
+          onClick={handleUpload}
+          disabled={uploading || !file}
+          style={{
+            padding: '12px 30px',
+            background: uploading || !file ? 'rgba(100,100,100,0.5)' : 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
+            color: 'white',
+            border: 'none',
+            borderRadius: '10px',
+            fontSize: '15px',
+            fontWeight: '600',
+            cursor: uploading || !file ? 'not-allowed' : 'pointer',
+            boxShadow: uploading || !file ? 'none' : '0 4px 15px rgba(98,0,238,0.3)',
+            transition: 'all 0.3s',
+            whiteSpace: 'nowrap'
+          }}
+        >
+          {uploading ? '⏳ Upload...' : '📤 Upload APK'}
+        </button>
+      </div>
+
+      {file && (
+        <div style={{
+          marginTop: '15px',
+          padding: '12px',
+          background: 'rgba(98,0,238,0.1)',
+          border: '1px solid rgba(98,0,238,0.3)',
+          borderRadius: '10px',
+          color: '#9D4EDD',
+          fontSize: '13px'
+        }}>
+          📄 Fichier sélectionné : <strong>{file.name}</strong> ({(file.size / 1024 / 1024).toFixed(2)} MB)
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function AdminPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
   const [news, setNews] = useState([]);
+  const [activeTab, setActiveTab] = useState('news'); // 'news' ou 'apk'
 
   // Données multilingues
   const [formData, setFormData] = useState({
@@ -143,17 +279,78 @@ export default function AdminPage() {
         </div>
       </nav>
 
+      {/* Onglets */}
+      <div style={{
+        background: 'rgba(20,20,20,0.8)',
+        borderBottom: '1px solid rgba(255,255,255,0.05)',
+        display: 'flex'
+      }}>
+        <button
+          onClick={() => setActiveTab('news')}
+          style={{
+            flex: 1,
+            padding: '18px 30px',
+            background: activeTab === 'news' ? 'rgba(98,0,238,0.2)' : 'transparent',
+            color: activeTab === 'news' ? '#9D4EDD' : '#888',
+            border: 'none',
+            borderBottom: activeTab === 'news' ? '3px solid #6200EE' : '3px solid transparent',
+            cursor: 'pointer',
+            fontSize: '15px',
+            fontWeight: '600',
+            transition: 'all 0.3s'
+          }}
+        >
+          📝 Gestion des News
+        </button>
+        <button
+          onClick={() => setActiveTab('apk')}
+          style={{
+            flex: 1,
+            padding: '18px 30px',
+            background: activeTab === 'apk' ? 'rgba(98,0,238,0.2)' : 'transparent',
+            color: activeTab === 'apk' ? '#9D4EDD' : '#888',
+            border: 'none',
+            borderBottom: activeTab === 'apk' ? '3px solid #6200EE' : '3px solid transparent',
+            cursor: 'pointer',
+            fontSize: '15px',
+            fontWeight: '600',
+            transition: 'all 0.3s'
+          }}
+        >
+          📱 Upload APK
+        </button>
+      </div>
+
       <div style={{ padding: '40px', maxWidth: '1400px', margin: '0 auto' }}>
-        <div style={{
-          background: 'rgba(20,20,20,0.6)',
-          border: '1px solid rgba(98,0,238,0.2)',
-          padding: '40px',
-          borderRadius: '20px',
-          marginBottom: '30px'
-        }}>
-          <h2 style={{ marginTop: 0, marginBottom: '30px', color: 'white', fontSize: '28px', fontWeight: '700' }}>
-            📝 Créer une nouvelle news
-          </h2>
+        {/* Section Upload APK */}
+        {activeTab === 'apk' && (
+          <div style={{
+            background: 'rgba(20,20,20,0.6)',
+            border: '1px solid rgba(98,0,238,0.2)',
+            padding: '40px',
+            borderRadius: '20px',
+            marginBottom: '30px'
+          }}>
+            <h2 style={{ marginTop: 0, marginBottom: '30px', color: 'white', fontSize: '28px', fontWeight: '700' }}>
+              📱 Upload APK MyTone
+            </h2>
+            <ApkUploadSection />
+          </div>
+        )}
+
+        {/* Section News */}
+        {activeTab === 'news' && (
+          <>
+            <div style={{
+              background: 'rgba(20,20,20,0.6)',
+              border: '1px solid rgba(98,0,238,0.2)',
+              padding: '40px',
+              borderRadius: '20px',
+              marginBottom: '30px'
+            }}>
+              <h2 style={{ marginTop: 0, marginBottom: '30px', color: 'white', fontSize: '28px', fontWeight: '700' }}>
+                📝 Créer une nouvelle news
+              </h2>
 
           {message && (
             <div style={{
@@ -387,6 +584,8 @@ export default function AdminPage() {
             </div>
           )}
         </div>
+          </>
+        )}
       </div>
     </div>
   );
