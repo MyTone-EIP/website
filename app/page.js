@@ -67,6 +67,30 @@ export default function Home() {
             onClick={() => router.push('/login/user')}
             style={{
               padding: '10px 24px',
+              background: 'transparent',
+              color: '#9D4EDD',
+              border: '2px solid #6200EE',
+              borderRadius: '25px',
+              cursor: 'pointer',
+              fontWeight: '600',
+              fontSize: '14px',
+              transition: 'all 0.2s'
+            }}
+            onMouseOver={(e) => {
+              e.target.style.background = 'rgba(98,0,238,0.1)';
+              e.target.style.transform = 'scale(1.05)';
+            }}
+            onMouseOut={(e) => {
+              e.target.style.background = 'transparent';
+              e.target.style.transform = 'scale(1)';
+            }}
+          >
+            {t.login}
+          </button>
+          <button
+            onClick={() => router.push('/signup')}
+            style={{
+              padding: '10px 24px',
               background: 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
               color: 'white',
               border: 'none',
@@ -80,7 +104,7 @@ export default function Home() {
             onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
             onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
           >
-            {t.connection}
+            {t.signup}
           </button>
         </div>
       </nav>
