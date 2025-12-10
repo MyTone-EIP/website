@@ -3,9 +3,14 @@
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/contexts/translations';
+import LanguageSelector from '@/components/LanguageSelector';
 
 // Composant pour l'upload APK
 function ApkUploadSection() {
+  const { currentLanguage } = useLanguage();
+  const t = translations[currentLanguage];
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [uploadMessage, setUploadMessage] = useState('');
@@ -14,7 +19,7 @@ function ApkUploadSection() {
     const selectedFile = e.target.files?.[0];
     if (selectedFile) {
       if (!selectedFile.name.endsWith('.apk')) {
-        setUploadMessage('❌ Le fichier doit être un APK');
+        setUploadMessage('❌ ' + t.apkFileRequired);
         setFile(null);
         return;
       }
@@ -25,7 +30,7 @@ function ApkUploadSection() {
 
   const handleUpload = async () => {
     if (!file) {
-      setUploadMessage('❌ Veuillez sélectionner un fichier APK');
+      setUploadMessage('❌ ' + t.pleaseSelectApk);
       return;
     }
 
@@ -118,7 +123,7 @@ function ApkUploadSection() {
             whiteSpace: 'nowrap'
           }}
         >
-          {uploading ? '⏳ Upload...' : '📤 Upload APK'}
+          {uploading ? t.uploading : t.uploadApk}
         </button>
       </div>
 
@@ -132,7 +137,7 @@ function ApkUploadSection() {
           color: '#9D4EDD',
           fontSize: '13px'
         }}>
-          📄 Fichier sélectionné : <strong>{file.name}</strong> ({(file.size / 1024 / 1024).toFixed(2)} MB)
+          {t.fileSelected}: <strong>{file.name}</strong> ({(file.size / 1024 / 1024).toFixed(2)} MB)
         </div>
       )}
     </div>
@@ -146,6 +151,8 @@ export default function AdminPage() {
   const [message, setMessage] = useState('');
   const [news, setNews] = useState([]);
   const [activeTab, setActiveTab] = useState('news'); // 'news' ou 'apk'
+  const { currentLanguage } = useLanguage();
+  const t = translations[currentLanguage];
 
   // Données multilingues
   const [formData, setFormData] = useState({
@@ -230,7 +237,7 @@ export default function AdminPage() {
   };
 
   if (status === 'loading') {
-    return <div style={{ padding: '40px', textAlign: 'center', background: '#0a0a0a', minHeight: '100vh', color: 'white' }}>Chargement...</div>;
+    return <div style={{ padding: '40px', textAlign: 'center', background: '#0a0a0a', minHeight: '100vh', color: 'white' }}>{t.loading}</div>;
   }
 
   if (!session || session.user?.role !== 'admin') {
@@ -259,6 +266,7 @@ export default function AdminPage() {
           MyTone Admin
         </div>
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+          <LanguageSelector />
           <span style={{ color: '#888', fontSize: '14px' }}>
             🔒 {session.user.username || session.user.name}
           </span>
@@ -274,7 +282,7 @@ export default function AdminPage() {
               fontSize: '14px'
             }}
           >
-            Déconnexion
+            {t.logout}
           </button>
         </div>
       </nav>
@@ -300,7 +308,7 @@ export default function AdminPage() {
             transition: 'all 0.3s'
           }}
         >
-          📝 Gestion des News
+          {t.newsManagement}
         </button>
         <button
           onClick={() => setActiveTab('apk')}
@@ -317,7 +325,7 @@ export default function AdminPage() {
             transition: 'all 0.3s'
           }}
         >
-          📱 Upload APK
+          {t.uploadApkTab}
         </button>
       </div>
 
@@ -332,7 +340,7 @@ export default function AdminPage() {
             marginBottom: '30px'
           }}>
             <h2 style={{ marginTop: 0, marginBottom: '30px', color: 'white', fontSize: '28px', fontWeight: '700' }}>
-              📱 Upload APK MyTone
+              {t.uploadApkTitle}
             </h2>
             <ApkUploadSection />
           </div>
@@ -349,7 +357,7 @@ export default function AdminPage() {
               marginBottom: '30px'
             }}>
               <h2 style={{ marginTop: 0, marginBottom: '30px', color: 'white', fontSize: '28px', fontWeight: '700' }}>
-                📝 Créer une nouvelle news
+                {t.createNews}
               </h2>
 
           {message && (
@@ -404,7 +412,7 @@ export default function AdminPage() {
                       fontWeight: '500',
                       fontSize: '13px'
                     }}>
-                      Titre
+                      {t.title}
                     </label>
                     <input
                       type="text"
@@ -421,7 +429,7 @@ export default function AdminPage() {
                         color: 'white',
                         outline: 'none'
                       }}
-                      placeholder={`Titre en ${lang.name.toLowerCase()}`}
+                      placeholder={`${t.title} (${lang.name})`}
                     />
                   </div>
 
@@ -433,7 +441,7 @@ export default function AdminPage() {
                       fontWeight: '500',
                       fontSize: '13px'
                     }}>
-                      Description
+                      {t.description}
                     </label>
                     <textarea
                       value={formData[`description_${lang.code}`]}
@@ -451,7 +459,7 @@ export default function AdminPage() {
                         outline: 'none',
                         resize: 'vertical'
                       }}
-                      placeholder={`Description en ${lang.name.toLowerCase()}`}
+                      placeholder={`${t.description} (${lang.name})`}
                     />
                   </div>
                 </div>
@@ -480,7 +488,7 @@ export default function AdminPage() {
                   transition: 'all 0.3s'
                 }}
               >
-                {loading ? '⏳ Publication en cours...' : '✨ Publier la news dans toutes les langues'}
+                {loading ? t.publishing : t.publishNews}
               </button>
             </div>
           </form>
@@ -494,11 +502,11 @@ export default function AdminPage() {
           borderRadius: '20px'
         }}>
           <h2 style={{ marginTop: 0, marginBottom: '25px', color: 'white', fontSize: '24px', fontWeight: '700' }}>
-            📰 News publiées ({news.length})
+            {t.publishedNews} ({news.length})
           </h2>
 
           {news.length === 0 ? (
-            <p style={{ color: '#666', textAlign: 'center', padding: '40px' }}>Aucune news pour le moment</p>
+            <p style={{ color: '#666', textAlign: 'center', padding: '40px' }}>{t.noNews}</p>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '30px' }}>
               {news.map((item) => (

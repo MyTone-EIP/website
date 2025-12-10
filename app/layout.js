@@ -1,6 +1,7 @@
 'use client';
 
 import { SessionProvider } from 'next-auth/react';
+import { LanguageProvider } from '@/contexts/LanguageContext';
 
 export default function RootLayout({ children }) {
   return (
@@ -11,7 +12,9 @@ export default function RootLayout({ children }) {
       </head>
       <body style={{ margin: 0, padding: 0 }}>
         <SessionProvider>
-          {children}
+          <LanguageProvider>
+            {children}
+          </LanguageProvider>
         </SessionProvider>
       </body>
     </html>

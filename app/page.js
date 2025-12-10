@@ -2,10 +2,15 @@
 
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/contexts/translations';
+import LanguageSelector from '@/components/LanguageSelector';
 
 export default function Home() {
   const router = useRouter();
   const [downloading, setDownloading] = useState(false);
+  const { currentLanguage } = useLanguage();
+  const t = translations[currentLanguage];
 
   const handleDownload = async () => {
     setDownloading(true);
@@ -56,25 +61,28 @@ export default function Home() {
           </div>
           <span style={{ fontSize: '12px', color: '#888', fontWeight: '400' }}>BETA</span>
         </div>
-        <button
-          onClick={() => router.push('/login/user')}
-          style={{
-            padding: '10px 24px',
-            background: 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
-            color: 'white',
-            border: 'none',
-            borderRadius: '25px',
-            cursor: 'pointer',
-            fontWeight: '600',
-            fontSize: '14px',
-            transition: 'transform 0.2s',
-            boxShadow: '0 4px 15px rgba(98,0,238,0.3)'
-          }}
-          onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
-          onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
-        >
-          Connexion
-        </button>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+          <LanguageSelector />
+          <button
+            onClick={() => router.push('/login/user')}
+            style={{
+              padding: '10px 24px',
+              background: 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
+              color: 'white',
+              border: 'none',
+              borderRadius: '25px',
+              cursor: 'pointer',
+              fontWeight: '600',
+              fontSize: '14px',
+              transition: 'transform 0.2s',
+              boxShadow: '0 4px 15px rgba(98,0,238,0.3)'
+            }}
+            onMouseOver={(e) => e.target.style.transform = 'scale(1.05)'}
+            onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+          >
+            {t.connection}
+          </button>
+        </div>
       </nav>
 
       {/* Hero Section */}
@@ -111,7 +119,7 @@ export default function Home() {
           fontWeight: '600',
           color: '#6200EE'
         }}>
-          🎵 Turn voice into music
+          {t.tagline}
         </div>
         
         <h2 style={{
@@ -124,7 +132,7 @@ export default function Home() {
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text'
         }}>
-          Ideas into Songs.
+          {t.heroTitle}
         </h2>
         
         <p style={{
@@ -135,9 +143,7 @@ export default function Home() {
           margin: '0 auto 50px',
           lineHeight: '1.6'
         }}>
-          La créativité ne prévient pas : une mélodie peut surgir n'importe où, mais disparaître aussitôt.
-          <br />
-          <strong style={{ color: '#ddd' }}>MyTone</strong> transforme votre voix en musique instantanément.
+          {t.heroDescription}
         </p>
 
         {/* Download Section */}
@@ -152,10 +158,10 @@ export default function Home() {
         }}>
           <div style={{ fontSize: '48px', marginBottom: '20px' }}>📱</div>
           <h2 style={{ color: 'white', marginTop: 0, marginBottom: '15px', fontSize: '32px', fontWeight: '700' }}>
-            Télécharger MyTone
+            {t.downloadTitle}
           </h2>
           <p style={{ color: '#bbb', marginBottom: '35px', fontSize: '16px' }}>
-            Version Android (APK) - Transformez votre voix en musique dès maintenant
+            {t.downloadDescription}
           </p>
           <button
             onClick={handleDownload}
@@ -174,7 +180,7 @@ export default function Home() {
               cursor: downloading ? 'not-allowed' : 'pointer'
             }}
           >
-            {downloading ? '⏳ Chargement...' : '⬇ Télécharger l\'APK'}
+            {downloading ? `⏳ ${t.downloading}` : `⬇ ${t.downloadButton}`}
           </button>
           <p style={{ 
             color: '#888', 

@@ -3,12 +3,17 @@
 import { useSession, signOut } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
 import { useState, useEffect } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/contexts/translations';
+import LanguageSelector from '@/components/LanguageSelector';
 
 export default function DashboardPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [news, setNews] = useState([]);
   const [loading, setLoading] = useState(true);
+  const { currentLanguage } = useLanguage();
+  const t = translations[currentLanguage];
 
   useEffect(() => {
     if (status === 'unauthenticated') {
@@ -45,7 +50,7 @@ export default function DashboardPage() {
         background: '#0a0a0a',
         color: 'white'
       }}>
-        Chargement...
+        {t.loading}
       </div>
     );
   }
@@ -76,6 +81,7 @@ export default function DashboardPage() {
           MyTone
         </div>
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
+          <LanguageSelector />
           <span style={{ color: '#888', fontSize: '14px' }}>
             👤 {session.user.name || session.user.email}
           </span>
@@ -91,7 +97,7 @@ export default function DashboardPage() {
               border: '1px solid rgba(255,255,255,0.1)'
             }}
           >
-            Accueil
+            {t.home}
           </a>
           <button
             onClick={() => signOut({ callbackUrl: '/' })}
@@ -105,7 +111,7 @@ export default function DashboardPage() {
               fontSize: '14px'
             }}
           >
-            Déconnexion
+            {t.logout}
           </button>
         </div>
       </nav>
@@ -125,10 +131,10 @@ export default function DashboardPage() {
             fontSize: '36px',
             fontWeight: '700'
           }}>
-            Bienvenue sur MyTone ! 🎵
+            {t.welcomeDashboard}
           </h1>
           <p style={{ color: '#aaa', fontSize: '18px', margin: 0 }}>
-            Consultez les dernières actualités et mises à jour de l'application.
+            {t.dashboardSubtitle}
           </p>
         </div>
 
@@ -139,7 +145,7 @@ export default function DashboardPage() {
           borderRadius: '20px'
         }}>
           <h2 style={{ marginTop: 0, marginBottom: '30px', color: 'white', fontSize: '28px', fontWeight: '700' }}>
-            📰 Dernières News
+            {t.latestNews}
           </h2>
 
           {news.length === 0 ? (
@@ -149,7 +155,7 @@ export default function DashboardPage() {
               color: '#666'
             }}>
               <div style={{ fontSize: '48px', marginBottom: '20px' }}>📭</div>
-              <p style={{ fontSize: '16px' }}>Aucune news disponible pour le moment</p>
+              <p style={{ fontSize: '16px' }}>{t.noNews}</p>
             </div>
           ) : (
             <div style={{ display: 'flex', flexDirection: 'column', gap: '25px' }}>
@@ -170,7 +176,7 @@ export default function DashboardPage() {
                     fontSize: '22px',
                     fontWeight: '600'
                   }}>
-                    {item.title}
+                    {item[`news_title_${currentLanguage}`] || item.title}
                   </h3>
                   <p style={{ 
                     margin: '0 0 15px 0', 
@@ -178,7 +184,7 @@ export default function DashboardPage() {
                     lineHeight: '1.7',
                     fontSize: '15px'
                   }}>
-                    {item.content}
+                    {item[`news_description_${currentLanguage}`] || item.content}
                   </p>
                   <small style={{ color: '#666', fontSize: '13px' }}>
                     📅 {new Date(item.created_at).toLocaleDateString('fr-FR', {

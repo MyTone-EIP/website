@@ -3,6 +3,9 @@
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import { useLanguage } from '@/contexts/LanguageContext';
+import { translations } from '@/contexts/translations';
+import LanguageSelector from '@/components/LanguageSelector';
 
 export default function AdminLoginPage() {
   const [username, setUsername] = useState('');
@@ -10,6 +13,8 @@ export default function AdminLoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { currentLanguage } = useLanguage();
+  const t = translations[currentLanguage];
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -70,6 +75,10 @@ export default function AdminLoginPage() {
         zIndex: 1,
         boxShadow: '0 20px 60px rgba(0,0,0,0.5)'
       }}>
+        <div style={{ position: 'absolute', top: '20px', right: '20px', zIndex: 10 }}>
+          <LanguageSelector />
+        </div>
+
         <div style={{ textAlign: 'center', marginBottom: '40px' }}>
           <div style={{
             fontSize: '36px',
@@ -83,7 +92,7 @@ export default function AdminLoginPage() {
             MyTone
           </div>
           <p style={{ color: '#888', margin: 0, fontSize: '14px' }}>
-            🔒 Connexion Admin
+            {t.loginAdmin}
           </p>
         </div>
 
@@ -111,7 +120,7 @@ export default function AdminLoginPage() {
               fontWeight: '500',
               fontSize: '14px'
             }}>
-              Username
+              {t.username}
             </label>
             <input
               type="text"
@@ -144,7 +153,7 @@ export default function AdminLoginPage() {
               fontWeight: '500',
               fontSize: '14px'
             }}>
-              Mot de passe
+              {t.password}
             </label>
             <input
               type="password"
@@ -186,7 +195,7 @@ export default function AdminLoginPage() {
               boxShadow: loading ? 'none' : '0 4px 15px rgba(98,0,238,0.3)'
             }}
           >
-            {loading ? 'Connexion...' : 'Se connecter'}
+            {loading ? t.loggingIn : t.loginButton}
           </button>
         </form>
 
@@ -200,7 +209,7 @@ export default function AdminLoginPage() {
               fontWeight: '500'
             }}
           >
-            ← Accueil
+            {t.backToHome}
           </a>
           <a 
             href="/login/user" 
@@ -210,7 +219,7 @@ export default function AdminLoginPage() {
               fontSize: '14px'
             }}
           >
-            Connexion User
+            {t.userLink}
           </a>
         </div>
       </div>
