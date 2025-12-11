@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { signIn } from 'next-auth/react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/contexts/translations';
 import LanguageSelector from '@/components/LanguageSelector';
@@ -57,8 +58,20 @@ export default function SignupPage() {
       const data = await response.json();
 
       if (response.ok) {
-        // Redirection vers login après inscription réussie
-        router.push('/login/user?registered=true');
+        // Connexion automatique après inscription
+        const loginResult = await signIn('credentials', {
+          redirect: false,
+          identifier: formData.email,
+          password: formData.password,
+          userType: 'user'
+        });
+        
+        if (!loginResult?.error) {
+          router.push('/');
+          router.refresh();
+        } else {
+          router.push('/');
+        }
       } else {
         setError(data.error || t.signupError);
       }

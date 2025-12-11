@@ -32,7 +32,7 @@ export default function UserLoginPage() {
       if (result?.error) {
         setError(result.error);
       } else {
-        router.push('/dashboard');
+        router.push('/');
         router.refresh();
       }
     } catch (err) {
