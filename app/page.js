@@ -339,11 +339,10 @@ export default function Home() {
           }}>
             <div style={{ fontSize: '48px', marginBottom: '20px' }}>🎤</div>
             <h3 style={{ color: 'white', margin: '0 0 15px 0', fontSize: '24px', fontWeight: '700' }}>
-              Voice to MIDI
+              {t.feature1Title}
             </h3>
             <p style={{ color: '#aaa', margin: 0, lineHeight: '1.6', fontSize: '15px' }}>
-              Transformez votre voix en piste MIDI exploitable en quelques secondes. 
-              Chantez ou fredonnez, MyTone fait le reste.
+              {t.feature1Desc}
             </p>
           </div>
 
@@ -357,11 +356,10 @@ export default function Home() {
           }}>
             <div style={{ fontSize: '48px', marginBottom: '20px' }}>🎸</div>
             <h3 style={{ color: 'white', margin: '0 0 15px 0', fontSize: '24px', fontWeight: '700' }}>
-              Stem Separation
+              {t.feature2Title}
             </h3>
             <p style={{ color: '#aaa', margin: 0, lineHeight: '1.6', fontSize: '15px' }}>
-              Séparez vos enregistrements en instruments distincts. 
-              Isolez la voix, la batterie, la guitare ou la basse.
+              {t.feature2Desc}
             </p>
           </div>
 
@@ -375,10 +373,10 @@ export default function Home() {
           }}>
             <div style={{ fontSize: '48px', marginBottom: '20px' }}>🎺</div>
             <h3 style={{ color: 'white', margin: '0 0 15px 0', fontSize: '24px', fontWeight: '700' }}>
-              Timbre Transform
+              {t.feature3Title}
             </h3>
             <p style={{ color: '#aaa', margin: 0, lineHeight: '1.6', fontSize: '15px' }}>
-              Métamorphosez votre timbre en guitare, violon, saxophone ou tout autre instrument.
+              {t.feature3Desc}
             </p>
           </div>
 
@@ -392,10 +390,10 @@ export default function Home() {
           }}>
             <div style={{ fontSize: '48px', marginBottom: '20px' }}>🤖</div>
             <h3 style={{ color: 'white', margin: '0 0 15px 0', fontSize: '24px', fontWeight: '700' }}>
-              AI Composition
+              {t.feature4Title}
             </h3>
             <p style={{ color: '#aaa', margin: 0, lineHeight: '1.6', fontSize: '15px' }}>
-              Enrichissez un simple "huhuhuhu" en véritable composition grâce à l'IA.
+              {t.feature4Desc}
             </p>
           </div>
 
@@ -409,10 +407,10 @@ export default function Home() {
           }}>
             <div style={{ fontSize: '48px', marginBottom: '20px' }}>⚡</div>
             <h3 style={{ color: 'white', margin: '0 0 15px 0', fontSize: '24px', fontWeight: '700' }}>
-              Instantané
+              {t.feature5Title}
             </h3>
             <p style={{ color: '#aaa', margin: 0, lineHeight: '1.6', fontSize: '15px' }}>
-              Capturez vos idées partout, à tout moment. Plus aucune inspiration ne se perd.
+              {t.feature5Desc}
             </p>
           </div>
 
@@ -426,10 +424,10 @@ export default function Home() {
           }}>
             <div style={{ fontSize: '48px', marginBottom: '20px' }}>🎯</div>
             <h3 style={{ color: 'white', margin: '0 0 15px 0', fontSize: '24px', fontWeight: '700' }}>
-              Pour Tous
+              {t.feature6Title}
             </h3>
             <p style={{ color: '#aaa', margin: 0, lineHeight: '1.6', fontSize: '15px' }}>
-              Accessible aux musiciens débutants comme confirmés. Simple et intuitive.
+              {t.feature6Desc}
             </p>
           </div>
         </div>
@@ -539,7 +537,7 @@ export default function Home() {
             marginBottom: '30px',
             color: 'white'
           }}>
-            Notre Mission
+            {t.missionTitle}
           </h2>
           <p style={{
             fontSize: '20px',
@@ -547,9 +545,7 @@ export default function Home() {
             lineHeight: '1.8',
             marginBottom: '0'
           }}>
-            Rendre la composition musicale <strong style={{ color: '#9D4EDD' }}>instantanée et accessible</strong>, 
-            pour que plus aucune idée ne se perde. De la voix à la chanson complète, 
-            nous donnons vie à votre inspiration.
+            {t.missionText}
           </p>
         </div>
       </div>
