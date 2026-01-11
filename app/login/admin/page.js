@@ -199,7 +199,7 @@ export default function AdminLoginPage() {
           </button>
         </form>
 
-        <div style={{ marginTop: '30px', textAlign: 'center', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ marginTop: '30px', textAlign: 'center', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
           <a 
             href="/" 
             style={{ 
@@ -211,16 +211,28 @@ export default function AdminLoginPage() {
           >
             {t.backToHome}
           </a>
-          <a 
-            href="/login/user" 
-            style={{ 
-              color: '#888', 
-              textDecoration: 'none',
-              fontSize: '14px'
-            }}
-          >
-            {t.userLink}
-          </a>
+          <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
+            <a 
+              href="/signup" 
+              style={{ 
+                color: '#888', 
+                textDecoration: 'none',
+                fontSize: '14px'
+              }}
+            >
+              {t.noAccountYet}
+            </a>
+            <a 
+              href="/login/user" 
+              style={{ 
+                color: '#888', 
+                textDecoration: 'none',
+                fontSize: '14px'
+              }}
+            >
+              {t.userLink}
+            </a>
+          </div>
         </div>
       </div>
     </div>

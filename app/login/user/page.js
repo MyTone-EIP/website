@@ -199,7 +199,7 @@ export default function UserLoginPage() {
           </button>
         </form>
 
-        <div style={{ marginTop: '30px', textAlign: 'center' }}>
+        <div style={{ marginTop: '30px', textAlign: 'center', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <a 
             href="/" 
             style={{ 
@@ -210,6 +210,16 @@ export default function UserLoginPage() {
             }}
           >
             {t.backToHome}
+          </a>
+          <a 
+            href="/signup" 
+            style={{ 
+              color: '#888', 
+              textDecoration: 'none',
+              fontSize: '14px'
+            }}
+          >
+            {t.noAccountYet}
           </a>
         </div>
 
