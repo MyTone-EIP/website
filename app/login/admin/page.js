@@ -139,7 +139,7 @@ export default function AdminLoginPage() {
                 outline: 'none',
                 transition: 'border-color 0.3s'
               }}
-              placeholder="admin"
+              placeholder={t.usernamePlaceholder}
               onFocus={(e) => e.target.style.borderColor = 'rgba(98,0,238,0.5)'}
               onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
             />
@@ -172,7 +172,7 @@ export default function AdminLoginPage() {
                 outline: 'none',
                 transition: 'border-color 0.3s'
               }}
-              placeholder="••••••••"
+              placeholder={t.passwordPlaceholder}
               onFocus={(e) => e.target.style.borderColor = 'rgba(98,0,238,0.5)'}
               onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
             />

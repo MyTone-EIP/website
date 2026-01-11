@@ -16,6 +16,13 @@ export const translations = {
     downloadTab: 'Téléchargement',
     newsTab: 'Actualités',
     downloadTip: 'Activez l\'installation depuis des sources inconnues dans vos paramètres',
+    apkNotAvailable: 'APK non disponible pour le moment',
+    downloadError: 'Erreur lors du téléchargement',
+    
+    // Placeholders
+    emailUsernamePlaceholder: 'user@email.com ou username',
+    usernamePlaceholder: 'admin',
+    passwordPlaceholder: '••••••••',
     
     // Fonctionnalités
     feature1Title: 'Voice to MIDI',
@@ -34,6 +41,10 @@ export const translations = {
     // Mission
     missionTitle: 'Notre Mission',
     missionText: 'Rendre la composition musicale instantanée et accessible, pour que plus aucune idée ne se perde. De la voix à la chanson complète, nous donnons vie à votre inspiration.',
+    
+    // Footer
+    footerSlogan: 'Turn voice into music. Ideas into songs.',
+    footerCopyright: '© 2025 MyTone - Projet EIP',
     
     // Login & Signup
     login: 'Connexion',
@@ -137,6 +148,13 @@ export const translations = {
     downloadTab: 'Download',
     newsTab: 'News',
     downloadTip: 'Enable installation from unknown sources in your settings',
+    apkNotAvailable: 'APK not available at the moment',
+    downloadError: 'Error while downloading',
+    
+    // Placeholders
+    emailUsernamePlaceholder: 'user@email.com or username',
+    usernamePlaceholder: 'admin',
+    passwordPlaceholder: '••••••••',
     feature1Title: 'Voice to MIDI',
     feature1Desc: 'Transform your voice into MIDI notes instantly',
     feature2Title: 'Stem Separation',
@@ -151,6 +169,11 @@ export const translations = {
     feature6Desc: 'Accessible to beginner and experienced musicians. Simple and intuitive',
     missionTitle: 'Our Mission',
     missionText: 'Make music composition instant and accessible, so no idea is lost. From voice to complete song, we bring your inspiration to life.',
+    
+    // Footer
+    footerSlogan: 'Turn voice into music. Ideas into songs.',
+    footerCopyright: '© 2025 MyTone - Project EIP',
+    
     login: 'Login',
     signup: 'Sign Up',
     loginUser: 'User Login',
@@ -245,8 +268,20 @@ export const translations = {
     downloadTab: 'Descarga',
     newsTab: 'Noticias',
     downloadTip: 'Activa la instalación desde fuentes desconocidas en tu configuración',
+    apkNotAvailable: 'APK no disponible en este momento',
+    downloadError: 'Error al descargar',
+    
+    // Placeholders
+    emailUsernamePlaceholder: 'user@email.com o usuario',
+    usernamePlaceholder: 'admin',
+    passwordPlaceholder: '••••••••',
     missionTitle: 'Nuestra Misión',
     missionText: 'Hacer que la composición musical sea instantánea y accesible, para que ninguna idea se pierda.',
+    
+    // Footer
+    footerSlogan: 'Convierte tu voz en música. Ideas en canciones.',
+    footerCopyright: '© 2025 MyTone - Proyecto EIP',
+    
     login: 'Iniciar sesión',
     signup: 'Registrarse',
     loginUser: 'Inicio de sesión de usuario',
@@ -352,6 +387,13 @@ export const translations = {
     downloadTab: 'Download',
     newsTab: 'Notizie',
     downloadTip: 'Abilita l\'installazione da fonti sconosciute nelle tue impostazioni',
+    apkNotAvailable: 'APK non disponibile al momento',
+    downloadError: 'Errore durante il download',
+    
+    // Placeholders
+    emailUsernamePlaceholder: 'user@email.com o username',
+    usernamePlaceholder: 'admin',
+    passwordPlaceholder: '••••••••',
     login: 'Accedi',
     signup: 'Registrati',
     loginUser: 'Accesso utente',
@@ -421,6 +463,10 @@ export const translations = {
     missionTitle: 'La Nostra Missione',
     missionText: 'Rendere la composizione musicale istantanea e accessibile, affinché nessuna idea vada persa. Dalla voce alla canzone completa, diamo vita alla tua ispirazione.',
     
+    // Footer
+    footerSlogan: 'Trasforma la voce in musica. Idee in canzoni.',
+    footerCopyright: '© 2025 MyTone - Progetto EIP',
+    
     // Termini e Condizioni
     cguTitle: 'Termini e Condizioni d\'Uso',
     cguLastUpdate: 'Ultimo aggiornamento',
@@ -461,6 +507,13 @@ export const translations = {
     downloadTab: 'Download',
     newsTab: 'Nachrichten',
     downloadTip: 'Aktivieren Sie die Installation aus unbekannten Quellen in Ihren Einstellungen',
+    apkNotAvailable: 'APK derzeit nicht verfügbar',
+    downloadError: 'Fehler beim Herunterladen',
+    
+    // Placeholders
+    emailUsernamePlaceholder: 'user@email.com oder benutzername',
+    usernamePlaceholder: 'admin',
+    passwordPlaceholder: '••••••••',
     login: 'Anmelden',
     signup: 'Registrieren',
     loginUser: 'Benutzer-Login',
@@ -530,6 +583,10 @@ export const translations = {
     missionTitle: 'Unsere Mission',
     missionText: 'Musikkomposition sofort und zugänglich machen, damit keine Idee verloren geht. Von der Stimme zum vollständigen Song hauchen wir Ihrer Inspiration Leben ein.',
     
+    // Footer
+    footerSlogan: 'Stimme in Musik verwandeln. Ideen in Lieder.',
+    footerCopyright: '© 2025 MyTone - Projekt EIP',
+    
     // Nutzungsbedingungen
     cguTitle: 'Allgemeine Nutzungsbedingungen',
     cguLastUpdate: 'Letzte Aktualisierung',
@@ -570,6 +627,13 @@ export const translations = {
     downloadTab: '下载',
     newsTab: '新闻',
     downloadTip: '在设置中启用未知来源安装',
+    apkNotAvailable: 'APK 目前不可用',
+    downloadError: '下载错误',
+    
+    // Placeholders
+    emailUsernamePlaceholder: 'user@email.com 或用户名',
+    usernamePlaceholder: 'admin',
+    passwordPlaceholder: '••••••••',
     login: '登录',
     signup: '注册',
     loginUser: '用户登录',
@@ -638,6 +702,10 @@ export const translations = {
     feature6Desc: '适合初学者和有经验的音乐家。简单直观',
     missionTitle: '我们的使命',
     missionText: '让音乐创作变得即时和可访问，不让任何想法流失。从声音到完整歌曲，我们让您的灵感变为现实。',
+    
+    // Footer
+    footerSlogan: '将声音转化为音乐。想法变成歌曲。',
+    footerCopyright: '© 2025 MyTone - 项目 EIP',
     
     // 使用条款
     cguTitle: '使用条款和条件',

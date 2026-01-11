@@ -48,10 +48,10 @@ export default function Home() {
       if (data.url) {
         window.open(data.url, '_blank');
       } else {
-        alert('APK non disponible pour le moment');
+        alert(t.apkNotAvailable);
       }
     } catch (error) {
-      alert('Erreur lors du téléchargement');
+      alert(t.downloadError);
     } finally {
       setDownloading(false);
     }
@@ -575,10 +575,10 @@ export default function Home() {
           MyTone
         </div>
         <p style={{ margin: '10px 0', color: '#666', fontSize: '14px' }}>
-          Turn voice into music. Ideas into songs.
+          {t.footerSlogan}
         </p>
         <p style={{ margin: '20px 0 0 0', color: '#444', fontSize: '13px' }}>
-          © 2025 MyTone - Projet EIP
+          {t.footerCopyright}
           {' · '}
           <a href="/cgu" style={{ color: '#9D4EDD', textDecoration: 'none' }}>
             {t.cguTitle || 'CGU'}
