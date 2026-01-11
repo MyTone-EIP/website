@@ -14,11 +14,16 @@ export default function Home() {
   const [activeTab, setActiveTab] = useState('download');
   const [news, setNews] = useState([]);
   const [loadingNews, setLoadingNews] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
   const { currentLanguage } = useLanguage();
   const t = translations[currentLanguage];
 
   useEffect(() => {
     fetchNews();
+    
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   const fetchNews = async () => {
@@ -41,7 +46,6 @@ export default function Home() {
       const data = await response.json();
       
       if (data.url) {
-        // Ouvrir l'URL de téléchargement dans un nouvel onglet
         window.open(data.url, '_blank');
       } else {
         alert('APK non disponible pour le moment');
@@ -64,43 +68,45 @@ export default function Home() {
       <nav style={{
         background: 'rgba(0,0,0,0.5)',
         backdropFilter: 'blur(20px)',
-        padding: '20px 60px',
+        padding: windowWidth <= 768 ? '15px 20px' : '20px 60px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
         borderBottom: '1px solid rgba(255,255,255,0.1)',
         position: 'sticky',
         top: 0,
-        zIndex: 1000
+        zIndex: 1000,
+        flexWrap: 'wrap',
+        gap: '10px'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
           <div style={{
-            fontSize: '28px',
+            fontSize: windowWidth <= 768 ? '20px' : '28px',
             fontWeight: '700',
             color: '#6200EE'
           }}>
             MyTone
           </div>
-          <span style={{ fontSize: '12px', color: '#888', fontWeight: '400' }}>BETA</span>
+          <span style={{ fontSize: windowWidth <= 768 ? '10px' : '12px', color: '#888', fontWeight: '400' }}>BETA</span>
         </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: windowWidth <= 768 ? '8px' : '15px', flexWrap: 'wrap' }}>
           <LanguageSelector />
           {session ? (
             <>
-              <span style={{ color: '#888', fontSize: '14px' }}>
+              <span style={{ color: '#888', fontSize: windowWidth <= 768 ? '12px' : '14px', display: windowWidth <= 480 ? 'none' : 'inline' }}>
                 👤 {session.user.name || session.user.email}
               </span>
               <button
                 onClick={() => signOut({ callbackUrl: '/' })}
                 style={{
-                  padding: '10px 24px',
+                  padding: windowWidth <= 768 ? '8px 16px' : '10px 24px',
                   background: 'rgba(239,68,68,0.1)',
                   color: '#EF4444',
                   border: '1px solid rgba(239,68,68,0.3)',
                   borderRadius: '25px',
                   cursor: 'pointer',
                   fontWeight: '600',
-                  fontSize: '14px',
+                  fontSize: windowWidth <= 768 ? '12px' : '14px',
                   transition: 'all 0.2s'
                 }}
                 onMouseOver={(e) => {
@@ -120,14 +126,14 @@ export default function Home() {
               <button
                 onClick={() => router.push('/login/user')}
                 style={{
-                  padding: '10px 24px',
+                  padding: windowWidth <= 768 ? '8px 16px' : '10px 24px',
                   background: 'transparent',
                   color: '#9D4EDD',
                   border: '2px solid #6200EE',
                   borderRadius: '25px',
                   cursor: 'pointer',
                   fontWeight: '600',
-                  fontSize: '14px',
+                  fontSize: windowWidth <= 768 ? '12px' : '14px',
                   transition: 'all 0.2s'
                 }}
                 onMouseOver={(e) => {
@@ -144,14 +150,14 @@ export default function Home() {
               <button
                 onClick={() => router.push('/signup')}
                 style={{
-                  padding: '10px 24px',
+                  padding: windowWidth <= 768 ? '8px 16px' : '10px 24px',
                   background: 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
                   color: 'white',
                   border: 'none',
                   borderRadius: '25px',
                   cursor: 'pointer',
                   fontWeight: '600',
-                  fontSize: '14px',
+                  fontSize: windowWidth <= 768 ? '12px' : '14px',
                   transition: 'transform 0.2s',
                   boxShadow: '0 4px 15px rgba(98,0,238,0.3)'
                 }}
@@ -167,13 +173,13 @@ export default function Home() {
 
       {/* Hero Section */}
       <div style={{
-        padding: '60px 50px 40px',
+        padding: windowWidth <= 768 ? '40px 20px 30px' : '60px 50px 40px',
         maxWidth: '1200px',
         margin: '0 auto',
         textAlign: 'center'
       }}>
         <h1 style={{
-          fontSize: '96px',
+          fontSize: windowWidth <= 480 ? '48px' : windowWidth <= 768 ? '64px' : '96px',
           fontWeight: '900',
           marginBottom: '20px',
           lineHeight: '1.2',
@@ -181,7 +187,7 @@ export default function Home() {
           WebkitBackgroundClip: 'text',
           WebkitTextFillColor: 'transparent',
           backgroundClip: 'text',
-          letterSpacing: '-2px'
+          letterSpacing: windowWidth <= 768 ? '-1px' : '-2px'
         }}>
           MyTone
         </h1>
@@ -201,7 +207,7 @@ export default function Home() {
         </div>
         
         <h2 style={{
-          fontSize: '72px',
+          fontSize: windowWidth <= 480 ? '32px' : windowWidth <= 768 ? '48px' : '72px',
           fontWeight: '800',
           marginBottom: '30px',
           lineHeight: '1.1',
@@ -214,12 +220,13 @@ export default function Home() {
         </h2>
         
         <p style={{
-          fontSize: '22px',
+          fontSize: windowWidth <= 768 ? '16px' : '22px',
           color: '#aaa',
-          marginBottom: '50px',
+          marginBottom: windowWidth <= 768 ? '30px' : '50px',
           maxWidth: '800px',
-          margin: '0 auto 50px',
-          lineHeight: '1.6'
+          margin: windowWidth <= 768 ? '0 auto 30px' : '0 auto 50px',
+          lineHeight: '1.6',
+          padding: windowWidth <= 768 ? '0 10px' : '0'
         }}>
           {t.heroDescription}
         </p>
@@ -236,15 +243,15 @@ export default function Home() {
         <button
           onClick={() => setActiveTab('download')}
           style={{
-            flex: '0 0 auto',
-            minWidth: '250px',
-            padding: '18px 40px',
+            flex: windowWidth <= 768 ? '1' : '0 0 auto',
+            minWidth: windowWidth <= 768 ? 'auto' : '250px',
+            padding: windowWidth <= 768 ? '14px 20px' : '18px 40px',
             background: activeTab === 'download' ? 'rgba(98,0,238,0.2)' : 'transparent',
             color: activeTab === 'download' ? '#9D4EDD' : '#888',
             border: 'none',
             borderBottom: activeTab === 'download' ? '3px solid #6200EE' : '3px solid transparent',
             cursor: 'pointer',
-            fontSize: '15px',
+            fontSize: windowWidth <= 768 ? '13px' : '15px',
             fontWeight: '600',
             transition: 'all 0.3s'
           }}
@@ -254,15 +261,15 @@ export default function Home() {
         <button
           onClick={() => setActiveTab('news')}
           style={{
-            flex: '0 0 auto',
-            minWidth: '250px',
-            padding: '18px 40px',
+            flex: windowWidth <= 768 ? '1' : '0 0 auto',
+            minWidth: windowWidth <= 768 ? 'auto' : '250px',
+            padding: windowWidth <= 768 ? '14px 20px' : '18px 40px',
             background: activeTab === 'news' ? 'rgba(98,0,238,0.2)' : 'transparent',
             color: activeTab === 'news' ? '#9D4EDD' : '#888',
             border: 'none',
             borderBottom: activeTab === 'news' ? '3px solid #6200EE' : '3px solid transparent',
             cursor: 'pointer',
-            fontSize: '15px',
+            fontSize: windowWidth <= 768 ? '13px' : '15px',
             fontWeight: '600',
             transition: 'all 0.3s'
           }}
@@ -272,22 +279,22 @@ export default function Home() {
       </div>
 
       {/* Contenu des onglets */}
-      <div style={{ padding: '60px 40px', maxWidth: '1200px', margin: '0 auto' }}>
+      <div style={{ padding: windowWidth <= 768 ? '40px 20px' : '60px 40px', maxWidth: '1200px', margin: '0 auto' }}>
         {activeTab === 'download' && (
           <div>
             {/* Download Section */}
             <div style={{
               background: 'linear-gradient(135deg, rgba(98,0,238,0.1) 0%, rgba(157,78,221,0.1) 100%)',
               border: '1px solid rgba(98,0,238,0.2)',
-              borderRadius: '24px',
-              padding: '50px',
+              borderRadius: windowWidth <= 768 ? '16px' : '24px',
+              padding: windowWidth <= 768 ? '30px 20px' : '50px',
               maxWidth: '700px',
-              margin: '0 auto 60px',
+              margin: windowWidth <= 768 ? '0 auto 40px' : '0 auto 60px',
               backdropFilter: 'blur(10px)',
               textAlign: 'center'
             }}>
               <div style={{ fontSize: '48px', marginBottom: '20px' }}>📱</div>
-              <h2 style={{ color: 'white', marginTop: 0, marginBottom: '15px', fontSize: '32px', fontWeight: '700' }}>
+              <h2 style={{ color: 'white', marginTop: 0, marginBottom: '15px', fontSize: windowWidth <= 768 ? '24px' : '32px', fontWeight: '700' }}>
                 {t.downloadTitle}
               </h2>
               <p style={{ color: '#bbb', marginBottom: '35px', fontSize: '16px' }}>
@@ -298,12 +305,12 @@ export default function Home() {
                 disabled={downloading}
                 style={{
                   display: 'inline-block',
-                  padding: '18px 50px',
+                  padding: windowWidth <= 768 ? '14px 30px' : '18px 50px',
                   background: downloading ? 'rgba(100,100,100,0.5)' : 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
                   color: 'white',
                   borderRadius: '30px',
                   fontWeight: '700',
-                  fontSize: '18px',
+                  fontSize: windowWidth <= 768 ? '16px' : '18px',
                   boxShadow: downloading ? 'none' : '0 8px 25px rgba(98,0,238,0.4)',
                   transition: 'all 0.3s',
                   border: 'none',
@@ -324,8 +331,8 @@ export default function Home() {
             {/* Features */}
             <div style={{
               display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-              gap: '30px',
+              gridTemplateColumns: windowWidth <= 768 ? '1fr' : 'repeat(auto-fit, minmax(300px, 1fr))',
+              gap: windowWidth <= 768 ? '20px' : '30px',
               maxWidth: '1100px',
               margin: '0 auto'
             }}>
@@ -338,10 +345,10 @@ export default function Home() {
             transition: 'transform 0.3s'
           }}>
             <div style={{ fontSize: '48px', marginBottom: '20px' }}>🎤</div>
-            <h3 style={{ color: 'white', margin: '0 0 15px 0', fontSize: '24px', fontWeight: '700' }}>
+            <h3 style={{ color: 'white', margin: '0 0 15px 0', fontSize: windowWidth <= 768 ? '20px' : '24px', fontWeight: '700' }}>
               {t.feature1Title}
             </h3>
-            <p style={{ color: '#aaa', margin: 0, lineHeight: '1.6', fontSize: '15px' }}>
+            <p style={{ color: '#aaa', margin: 0, lineHeight: '1.6', fontSize: windowWidth <= 768 ? '14px' : '15px' }}>
               {t.feature1Desc}
             </p>
           </div>
@@ -349,16 +356,16 @@ export default function Home() {
           <div style={{
             background: 'rgba(20,20,20,0.8)',
             backdropFilter: 'blur(10px)',
-            padding: '40px',
-            borderRadius: '20px',
+            padding: windowWidth <= 768 ? '25px' : '40px',
+            borderRadius: windowWidth <= 768 ? '16px' : '20px',
             border: '1px solid rgba(255,142,83,0.2)',
             transition: 'transform 0.3s'
           }}>
             <div style={{ fontSize: '48px', marginBottom: '20px' }}>🎸</div>
-            <h3 style={{ color: 'white', margin: '0 0 15px 0', fontSize: '24px', fontWeight: '700' }}>
+            <h3 style={{ color: 'white', margin: '0 0 15px 0', fontSize: windowWidth <= 768 ? '20px' : '24px', fontWeight: '700' }}>
               {t.feature2Title}
             </h3>
-            <p style={{ color: '#aaa', margin: 0, lineHeight: '1.6', fontSize: '15px' }}>
+            <p style={{ color: '#aaa', margin: 0, lineHeight: '1.6', fontSize: windowWidth <= 768 ? '14px' : '15px' }}>
               {t.feature2Desc}
             </p>
           </div>
@@ -366,16 +373,16 @@ export default function Home() {
           <div style={{
             background: 'rgba(20,20,20,0.8)',
             backdropFilter: 'blur(10px)',
-            padding: '40px',
-            borderRadius: '20px',
+            padding: windowWidth <= 768 ? '25px' : '40px',
+            borderRadius: windowWidth <= 768 ? '16px' : '20px',
             border: '1px solid rgba(255,160,122,0.2)',
             transition: 'transform 0.3s'
           }}>
             <div style={{ fontSize: '48px', marginBottom: '20px' }}>🎺</div>
-            <h3 style={{ color: 'white', margin: '0 0 15px 0', fontSize: '24px', fontWeight: '700' }}>
+            <h3 style={{ color: 'white', margin: '0 0 15px 0', fontSize: windowWidth <= 768 ? '20px' : '24px', fontWeight: '700' }}>
               {t.feature3Title}
             </h3>
-            <p style={{ color: '#aaa', margin: 0, lineHeight: '1.6', fontSize: '15px' }}>
+            <p style={{ color: '#aaa', margin: 0, lineHeight: '1.6', fontSize: windowWidth <= 768 ? '14px' : '15px' }}>
               {t.feature3Desc}
             </p>
           </div>
@@ -383,16 +390,16 @@ export default function Home() {
           <div style={{
             background: 'rgba(20,20,20,0.8)',
             backdropFilter: 'blur(10px)',
-            padding: '40px',
-            borderRadius: '20px',
+            padding: windowWidth <= 768 ? '25px' : '40px',
+            borderRadius: windowWidth <= 768 ? '16px' : '20px',
             border: '1px solid rgba(255,107,107,0.2)',
             transition: 'transform 0.3s'
           }}>
             <div style={{ fontSize: '48px', marginBottom: '20px' }}>🤖</div>
-            <h3 style={{ color: 'white', margin: '0 0 15px 0', fontSize: '24px', fontWeight: '700' }}>
+            <h3 style={{ color: 'white', margin: '0 0 15px 0', fontSize: windowWidth <= 768 ? '20px' : '24px', fontWeight: '700' }}>
               {t.feature4Title}
             </h3>
-            <p style={{ color: '#aaa', margin: 0, lineHeight: '1.6', fontSize: '15px' }}>
+            <p style={{ color: '#aaa', margin: 0, lineHeight: '1.6', fontSize: windowWidth <= 768 ? '14px' : '15px' }}>
               {t.feature4Desc}
             </p>
           </div>
@@ -400,16 +407,16 @@ export default function Home() {
           <div style={{
             background: 'rgba(20,20,20,0.8)',
             backdropFilter: 'blur(10px)',
-            padding: '40px',
-            borderRadius: '20px',
+            padding: windowWidth <= 768 ? '25px' : '40px',
+            borderRadius: windowWidth <= 768 ? '16px' : '20px',
             border: '1px solid rgba(255,142,83,0.2)',
             transition: 'transform 0.3s'
           }}>
             <div style={{ fontSize: '48px', marginBottom: '20px' }}>⚡</div>
-            <h3 style={{ color: 'white', margin: '0 0 15px 0', fontSize: '24px', fontWeight: '700' }}>
+            <h3 style={{ color: 'white', margin: '0 0 15px 0', fontSize: windowWidth <= 768 ? '20px' : '24px', fontWeight: '700' }}>
               {t.feature5Title}
             </h3>
-            <p style={{ color: '#aaa', margin: 0, lineHeight: '1.6', fontSize: '15px' }}>
+            <p style={{ color: '#aaa', margin: 0, lineHeight: '1.6', fontSize: windowWidth <= 768 ? '14px' : '15px' }}>
               {t.feature5Desc}
             </p>
           </div>
@@ -417,16 +424,16 @@ export default function Home() {
           <div style={{
             background: 'rgba(20,20,20,0.8)',
             backdropFilter: 'blur(10px)',
-            padding: '40px',
-            borderRadius: '20px',
+            padding: windowWidth <= 768 ? '25px' : '40px',
+            borderRadius: windowWidth <= 768 ? '16px' : '20px',
             border: '1px solid rgba(255,160,122,0.2)',
             transition: 'transform 0.3s'
           }}>
             <div style={{ fontSize: '48px', marginBottom: '20px' }}>🎯</div>
-            <h3 style={{ color: 'white', margin: '0 0 15px 0', fontSize: '24px', fontWeight: '700' }}>
+            <h3 style={{ color: 'white', margin: '0 0 15px 0', fontSize: windowWidth <= 768 ? '20px' : '24px', fontWeight: '700' }}>
               {t.feature6Title}
             </h3>
-            <p style={{ color: '#aaa', margin: 0, lineHeight: '1.6', fontSize: '15px' }}>
+            <p style={{ color: '#aaa', margin: 0, lineHeight: '1.6', fontSize: windowWidth <= 768 ? '14px' : '15px' }}>
               {t.feature6Desc}
             </p>
           </div>
@@ -438,7 +445,7 @@ export default function Home() {
           <div>
             <h2 style={{ 
               color: 'white', 
-              fontSize: '32px', 
+              fontSize: windowWidth <= 768 ? '24px' : '32px', 
               fontWeight: '700', 
               marginBottom: '30px',
               textAlign: 'center'
@@ -476,7 +483,7 @@ export default function Home() {
                   <div
                     key={item.id}
                     style={{
-                      padding: '30px',
+                      padding: windowWidth <= 768 ? '20px' : '30px',
                       background: 'rgba(20,20,20,0.8)',
                       border: '1px solid rgba(98,0,238,0.2)',
                       borderRadius: '16px',
@@ -494,7 +501,7 @@ export default function Home() {
                     <h3 style={{ 
                       margin: '0 0 15px 0', 
                       color: 'white', 
-                      fontSize: '22px',
+                      fontSize: windowWidth <= 768 ? '18px' : '22px',
                       fontWeight: '600'
                     }}>
                       {item[`news_title_${currentLanguage}`] || item.news_title_en}
@@ -503,7 +510,7 @@ export default function Home() {
                       margin: '0 0 15px 0', 
                       color: '#bbb', 
                       lineHeight: '1.7',
-                      fontSize: '15px'
+                      fontSize: windowWidth <= 768 ? '14px' : '15px'
                     }}>
                       {item[`news_description_${currentLanguage}`] || item.news_description_en}
                     </p>
@@ -527,12 +534,12 @@ export default function Home() {
       {/* Mission Section */}
       <div style={{
         background: 'linear-gradient(135deg, rgba(98,0,238,0.05) 0%, rgba(157,78,221,0.05) 100%)',
-        padding: '80px 40px',
-        marginTop: '60px'
+        padding: windowWidth <= 768 ? '50px 20px' : '80px 40px',
+        marginTop: windowWidth <= 768 ? '40px' : '60px'
       }}>
         <div style={{ maxWidth: '900px', margin: '0 auto', textAlign: 'center' }}>
           <h2 style={{
-            fontSize: '42px',
+            fontSize: windowWidth <= 768 ? '28px' : '42px',
             fontWeight: '700',
             marginBottom: '30px',
             color: 'white'
@@ -540,7 +547,7 @@ export default function Home() {
             {t.missionTitle}
           </h2>
           <p style={{
-            fontSize: '20px',
+            fontSize: windowWidth <= 768 ? '16px' : '20px',
             color: '#bbb',
             lineHeight: '1.8',
             marginBottom: '0'
@@ -553,7 +560,7 @@ export default function Home() {
       {/* Footer */}
       <footer style={{
         textAlign: 'center',
-        padding: '50px 40px',
+        padding: windowWidth <= 768 ? '40px 20px' : '50px 40px',
         borderTop: '1px solid rgba(255,255,255,0.05)'
       }}>
         <div style={{
