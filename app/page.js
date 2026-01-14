@@ -40,6 +40,15 @@ export default function Home() {
   };
 
   const handleDownload = async () => {
+    // Afficher l'avertissement AI avant le téléchargement
+    const userConfirmed = window.confirm(
+      `${t.aiWarningTitle}\n\n${t.aiWarningMessage}`
+    );
+    
+    if (!userConfirmed) {
+      return; // L'utilisateur a annulé
+    }
+    
     setDownloading(true);
     try {
       const response = await fetch('/api/apk');

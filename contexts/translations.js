@@ -18,6 +18,10 @@ export const translations = {
     downloadTip: 'Activez l\'installation depuis des sources inconnues dans vos paramètres',
     apkNotAvailable: 'APK non disponible pour le moment',
     downloadError: 'Erreur lors du téléchargement',
+    aiWarningTitle: '⚠️ Fonctionnalités IA en Beta',
+    aiWarningMessage: 'MyTone est actuellement en phase Beta. Les fonctionnalités IA (Voice to MIDI, AI Composition, etc.) ne sont pas disponibles en permanence car les serveurs tournent uniquement pendant les phases de test.\n\nPour connaître les dates des prochaines sessions de test et utiliser les fonctionnalités IA, rejoignez notre Discord !',
+    aiWarningButton: 'J\'ai compris',
+    aiWarningCancel: 'Annuler',
     
     // Placeholders
     emailUsernamePlaceholder: 'user@email.com ou username',
@@ -151,6 +155,10 @@ export const translations = {
     downloadTip: 'Enable installation from unknown sources in your settings',
     apkNotAvailable: 'APK not available at the moment',
     downloadError: 'Error while downloading',
+    aiWarningTitle: '⚠️ AI Features in Beta',
+    aiWarningMessage: 'MyTone is currently in Beta phase. AI features (Voice to MIDI, AI Composition, etc.) are not permanently available as servers only run during testing phases.\n\nTo know the dates of the next testing sessions and use AI features, join our Discord!',
+    aiWarningButton: 'I understand',
+    aiWarningCancel: 'Cancel',
     
     // Placeholders
     emailUsernamePlaceholder: 'user@email.com or username',
