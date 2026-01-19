@@ -12,7 +12,7 @@ export default function LanguageSelector() {
       <button
         onClick={() => setIsOpen(!isOpen)}
         style={{
-          padding: '8px 16px',
+          padding: '2px 5px',
           background: 'rgba(255,255,255,0.05)',
           color: 'white',
           border: '1px solid rgba(255,255,255,0.1)',

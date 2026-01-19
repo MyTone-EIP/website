@@ -83,7 +83,7 @@ export default function AdminLoginPage() {
           <div style={{
             fontSize: '36px',
             fontWeight: '700',
-            background: 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
+            background: 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 50%, #B388FF 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
@@ -176,6 +176,16 @@ export default function AdminLoginPage() {
               onFocus={(e) => e.target.style.borderColor = 'rgba(98,0,238,0.5)'}
               onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
             />
+            <a 
+              href="/resetpwd" 
+              style={{ 
+                color: '#b187d3',
+                textDecoration: 'underline',
+                fontSize: '14px',
+              }}
+          >
+              {t.resetPassword}
+          </a>
           </div>
 
           <button
@@ -203,8 +213,8 @@ export default function AdminLoginPage() {
           <a 
             href="/" 
             style={{ 
-              color: '#9D4EDD', 
-              textDecoration: 'none',
+              color: '#b187d3', 
+              textDecoration: 'underline',
               fontSize: '14px',
               fontWeight: '500'
             }}
@@ -215,24 +225,39 @@ export default function AdminLoginPage() {
             <a 
               href="/signup" 
               style={{ 
-                color: '#888', 
-                textDecoration: 'none',
+                color: '#b187d3',
+                textDecoration: 'underline',
                 fontSize: '14px'
               }}
             >
               {t.noAccountYet}
             </a>
-            <a 
-              href="/login/user" 
-              style={{ 
-                color: '#888', 
-                textDecoration: 'none',
-                fontSize: '14px'
-              }}
-            >
-              {t.userLink}
-            </a>
           </div>
+          </div>
+
+          <div style={{ 
+            marginTop: '25px', 
+            textAlign: 'center',
+            paddingTop: '25px',
+            borderTop: '1px solid rgba(255,255,255,0.05)'
+        }}>
+          <p style={{ color: '#666', fontSize: '13px', marginBottom: '12px' }}>
+            {t.userQuestion}
+          </p>
+          <a 
+            href="/login/user" 
+            style={{ 
+              color: '#9D4EDD', 
+              textDecoration: 'underline',
+              fontSize: '14px',
+              fontWeight: '500',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '5px'
+            }}
+          >
+            {t.userLink}
+          </a>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
 import { useLanguage } from '@/contexts/LanguageContext';
@@ -12,15 +12,23 @@ export default function SignupPage() {
     name: '',
     surname: '',
     email: '',
+    confirmEmail: '',
     username: '',
     password: '',
     confirmPassword: ''
   });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
   const router = useRouter();
   const { currentLanguage } = useLanguage();
   const t = translations[currentLanguage];
+
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,6 +36,12 @@ export default function SignupPage() {
     setLoading(true);
 
     // Validation
+    if (formData.email !== formData.confirmEmail) {
+      setError(t.emailMismatch || 'Les emails ne correspondent pas');
+      setLoading(false);
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
       setError(t.passwordMismatch);
       setLoading(false);
@@ -98,7 +112,8 @@ export default function SignupPage() {
       justifyContent: 'center',
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
       position: 'relative',
-      padding: '40px 20px'
+      padding: windowWidth <= 1000 ? '30px 20px' : '40px 20px',
+      boxSizing: 'border-box'
     }}>
       {/* Background gradient */}
       <div style={{
@@ -114,11 +129,11 @@ export default function SignupPage() {
       <div style={{
         background: 'rgba(20,20,20,0.8)',
         backdropFilter: 'blur(20px)',
-        padding: '50px',
-        borderRadius: '24px',
+        padding: windowWidth <= 1000 ? '30px 20px' : '50px',
+        borderRadius: windowWidth <= 1000 ? '16px' : '24px',
         border: '1px solid rgba(98,0,238,0.2)',
         width: '100%',
-        maxWidth: '500px',
+        maxWidth: windowWidth <= 1000 ? '100%' : '500px',
         position: 'relative',
         zIndex: 1,
         boxShadow: '0 20px 60px rgba(0,0,0,0.5)'
@@ -127,9 +142,9 @@ export default function SignupPage() {
           <LanguageSelector />
         </div>
 
-        <div style={{ textAlign: 'center', marginBottom: '40px' }}>
+        <div style={{ textAlign: 'center', marginBottom: windowWidth <= 1000 ? '30px' : '40px' }}>
           <div style={{
-            fontSize: '36px',
+            fontSize: windowWidth <= 1000 ? '28px' : '36px',
             fontWeight: '700',
             background: 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
             WebkitBackgroundClip: 'text',
@@ -139,20 +154,20 @@ export default function SignupPage() {
           }}>
             MyTone
           </div>
-          <p style={{ color: '#888', margin: 0, fontSize: '14px' }}>
+          <p style={{ color: '#888', margin: 0, fontSize: windowWidth <= 1000 ? '13px' : '14px' }}>
             {t.signupTitle}
           </p>
         </div>
 
         {error && (
           <div style={{
-            padding: '12px',
+            padding: windowWidth <= 1000 ? '10px' : '12px',
             background: 'rgba(239,68,68,0.1)',
             border: '1px solid rgba(239,68,68,0.3)',
-            borderRadius: '10px',
+            borderRadius: windowWidth <= 1000 ? '8px' : '10px',
             color: '#EF4444',
-            marginBottom: '20px',
-            fontSize: '14px',
+            marginBottom: windowWidth <= 1000 ? '15px' : '20px',
+            fontSize: windowWidth <= 1000 ? '12px' : '14px',
             textAlign: 'center'
           }}>
             {error}
@@ -160,14 +175,14 @@ export default function SignupPage() {
         )}
 
         <form onSubmit={handleSubmit}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '15px', marginBottom: '20px' }}>
+          <div style={{ display: windowWidth <= 1000 ? 'block' : 'grid', gridTemplateColumns: windowWidth <= 1000 ? '1fr' : '1fr 1fr', gap: windowWidth <= 1000 ? '12px' : '15px', marginBottom: windowWidth <= 1000 ? '15px' : '20px' }}>
             <div>
               <label style={{ 
                 display: 'block', 
-                marginBottom: '10px', 
+                marginBottom: windowWidth <= 1000 ? '8px' : '10px', 
                 color: '#bbb', 
                 fontWeight: '500',
-                fontSize: '14px'
+                fontSize: windowWidth <= 1000 ? '13px' : '14px'
               }}>
                 {t.name} <span style={{ color: '#EF4444' }}>*</span>
               </label>
@@ -179,12 +194,12 @@ export default function SignupPage() {
                 required
                 style={{
                   width: '100%',
-                  padding: '14px',
+                  padding: windowWidth <= 1000 ? '12px' : '14px',
                   background: 'rgba(40,40,40,0.8)',
                   border: '1px solid rgba(255,255,255,0.1)',
-                  borderRadius: '10px',
+                  borderRadius: windowWidth <= 1000 ? '8px' : '10px',
                   color: 'white',
-                  fontSize: '14px',
+                  fontSize: windowWidth <= 1000 ? '13px' : '14px',
                   outline: 'none',
                   boxSizing: 'border-box'
                 }}
@@ -193,10 +208,10 @@ export default function SignupPage() {
             <div>
               <label style={{ 
                 display: 'block', 
-                marginBottom: '10px', 
+                marginBottom: windowWidth <= 1000 ? '8px' : '10px', 
                 color: '#bbb', 
                 fontWeight: '500',
-                fontSize: '14px'
+                fontSize: windowWidth <= 1000 ? '13px' : '14px'
               }}>
                 {t.surname} <span style={{ color: '#EF4444' }}>*</span>
               </label>
@@ -208,12 +223,12 @@ export default function SignupPage() {
                 required
                 style={{
                   width: '100%',
-                  padding: '14px',
+                  padding: windowWidth <= 1000 ? '12px' : '14px',
                   background: 'rgba(40,40,40,0.8)',
                   border: '1px solid rgba(255,255,255,0.1)',
-                  borderRadius: '10px',
+                  borderRadius: windowWidth <= 1000 ? '8px' : '10px',
                   color: 'white',
-                  fontSize: '14px',
+                  fontSize: windowWidth <= 1000 ? '13px' : '14px',
                   outline: 'none',
                   boxSizing: 'border-box'
                 }}
@@ -221,13 +236,13 @@ export default function SignupPage() {
             </div>
           </div>
 
-          <div style={{ marginBottom: '20px' }}>
+          <div style={{ marginBottom: windowWidth <= 1000 ? '15px' : '20px' }}>
             <label style={{ 
               display: 'block', 
-              marginBottom: '10px', 
+              marginBottom: windowWidth <= 1000 ? '8px' : '10px', 
               color: '#bbb', 
               fontWeight: '500',
-              fontSize: '14px'
+              fontSize: windowWidth <= 1000 ? '13px' : '14px'
             }}>
               {t.email} <span style={{ color: '#EF4444' }}>*</span>
             </label>
@@ -239,25 +254,55 @@ export default function SignupPage() {
               required
               style={{
                 width: '100%',
-                padding: '14px',
+                padding: windowWidth <= 1000 ? '12px' : '14px',
                 background: 'rgba(40,40,40,0.8)',
                 border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: '10px',
+                borderRadius: windowWidth <= 1000 ? '8px' : '10px',
                 color: 'white',
-                fontSize: '14px',
+                fontSize: windowWidth <= 1000 ? '13px' : '14px',
                 outline: 'none',
                 boxSizing: 'border-box'
               }}
             />
           </div>
 
-          <div style={{ marginBottom: '20px' }}>
+          <div style={{ marginBottom: windowWidth <= 1000 ? '15px' : '20px' }}>
             <label style={{ 
               display: 'block', 
-              marginBottom: '10px', 
+              marginBottom: windowWidth <= 1000 ? '8px' : '10px', 
               color: '#bbb', 
               fontWeight: '500',
-              fontSize: '14px'
+              fontSize: windowWidth <= 1000 ? '13px' : '14px'
+            }}>
+              {t.confirmEmail} {t.confirmEmail ? <span style={{ color: '#EF4444' }}>*</span> : ''} 
+            </label>
+            <input
+              type="email"
+              name="confirmEmail"
+              value={formData.confirmEmail}
+              onChange={handleChange}
+              required
+              style={{
+                width: '100%',
+                padding: windowWidth <= 1000 ? '12px' : '14px',
+                background: 'rgba(40,40,40,0.8)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: windowWidth <= 1000 ? '8px' : '10px',
+                color: 'white',
+                fontSize: windowWidth <= 1000 ? '13px' : '14px',
+                outline: 'none',
+                boxSizing: 'border-box'
+              }}
+            />
+          </div>
+
+          <div style={{ marginBottom: windowWidth <= 1000 ? '15px' : '20px' }}>
+            <label style={{ 
+              display: 'block', 
+              marginBottom: windowWidth <= 1000 ? '8px' : '10px', 
+              color: '#bbb', 
+              fontWeight: '500',
+              fontSize: windowWidth <= 1000 ? '13px' : '14px'
             }}>
               {t.username} <span style={{ color: '#EF4444' }}>*</span>
             </label>
@@ -269,25 +314,25 @@ export default function SignupPage() {
               required
               style={{
                 width: '100%',
-                padding: '14px',
+                padding: windowWidth <= 1000 ? '12px' : '14px',
                 background: 'rgba(40,40,40,0.8)',
                 border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: '10px',
+                borderRadius: windowWidth <= 1000 ? '8px' : '10px',
                 color: 'white',
-                fontSize: '14px',
+                fontSize: windowWidth <= 1000 ? '13px' : '14px',
                 outline: 'none',
                 boxSizing: 'border-box'
               }}
             />
           </div>
 
-          <div style={{ marginBottom: '20px' }}>
+          <div style={{ marginBottom: windowWidth <= 1000 ? '15px' : '20px' }}>
             <label style={{ 
               display: 'block', 
-              marginBottom: '10px', 
+              marginBottom: windowWidth <= 1000 ? '8px' : '10px', 
               color: '#bbb', 
               fontWeight: '500',
-              fontSize: '14px'
+              fontSize: windowWidth <= 1000 ? '13px' : '14px'
             }}>
               {t.password} <span style={{ color: '#EF4444' }}>*</span>
             </label>
@@ -299,25 +344,25 @@ export default function SignupPage() {
               required
               style={{
                 width: '100%',
-                padding: '14px',
+                padding: windowWidth <= 1000 ? '12px' : '14px',
                 background: 'rgba(40,40,40,0.8)',
                 border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: '10px',
+                borderRadius: windowWidth <= 1000 ? '8px' : '10px',
                 color: 'white',
-                fontSize: '14px',
+                fontSize: windowWidth <= 1000 ? '13px' : '14px',
                 outline: 'none',
                 boxSizing: 'border-box'
               }}
             />
           </div>
 
-          <div style={{ marginBottom: '20px' }}>
+          <div style={{ marginBottom: windowWidth <= 1000 ? '15px' : '20px' }}>
             <label style={{ 
               display: 'block', 
-              marginBottom: '10px', 
+              marginBottom: windowWidth <= 1000 ? '8px' : '10px', 
               color: '#bbb', 
               fontWeight: '500',
-              fontSize: '14px'
+              fontSize: windowWidth <= 1000 ? '13px' : '14px'
             }}>
               {t.confirmPassword} <span style={{ color: '#EF4444' }}>*</span>
             </label>
@@ -329,19 +374,19 @@ export default function SignupPage() {
               required
               style={{
                 width: '100%',
-                padding: '14px',
+                padding: windowWidth <= 1000 ? '12px' : '14px',
                 background: 'rgba(40,40,40,0.8)',
                 border: '1px solid rgba(255,255,255,0.1)',
-                borderRadius: '10px',
+                borderRadius: windowWidth <= 1000 ? '8px' : '10px',
                 color: 'white',
-                fontSize: '14px',
+                fontSize: windowWidth <= 1000 ? '13px' : '14px',
                 outline: 'none',
                 boxSizing: 'border-box'
               }}
             />
           </div>
 
-          <p style={{ color: '#888', fontSize: '13px', marginBottom: '20px', marginTop: '10px' }}>
+          <p style={{ color: '#888', fontSize: windowWidth <= 1000 ? '12px' : '13px', marginBottom: windowWidth <= 1000 ? '15px' : '20px', marginTop: '10px' }}>
             <span style={{ color: '#EF4444' }}>*</span> {t.requiredFields}
           </p>
 
@@ -350,12 +395,12 @@ export default function SignupPage() {
             disabled={loading}
             style={{
               width: '100%',
-              padding: '16px',
+              padding: windowWidth <= 1000 ? '14px' : '16px',
               background: loading ? 'rgba(100,100,100,0.5)' : 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
               color: 'white',
               border: 'none',
-              borderRadius: '10px',
-              fontSize: '16px',
+              borderRadius: windowWidth <= 1000 ? '8px' : '10px',
+              fontSize: windowWidth <= 1000 ? '15px' : '16px',
               fontWeight: '600',
               cursor: loading ? 'not-allowed' : 'pointer',
               transition: 'all 0.3s',
@@ -366,13 +411,13 @@ export default function SignupPage() {
           </button>
         </form>
 
-        <div style={{ marginTop: '30px', textAlign: 'center', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div style={{ marginTop: windowWidth <= 1000 ? '20px' : '30px', textAlign: 'center', display: 'flex', flexDirection: windowWidth <= 1000 ? 'column' : 'row', justifyContent: 'space-between', alignItems: 'center', gap: windowWidth <= 1000 ? '10px' : '0' }}>
           <a 
             href="/" 
             style={{ 
-              color: '#9D4EDD', 
-              textDecoration: 'none',
-              fontSize: '14px',
+              color: '#b187d3', 
+              textDecoration: 'underline',
+              fontSize: windowWidth <= 1000 ? '13px' : '14px',
               fontWeight: '500'
             }}
           >
@@ -381,9 +426,9 @@ export default function SignupPage() {
           <a 
             href="/login/user" 
             style={{ 
-              color: '#888', 
-              textDecoration: 'none',
-              fontSize: '14px'
+              color: '#b187d3', 
+              textDecoration: 'underline',
+              fontSize: windowWidth <= 1000 ? '13px' : '14px'
             }}
           >
             {t.alreadyHaveAccount}
