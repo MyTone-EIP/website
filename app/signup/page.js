@@ -12,6 +12,7 @@ export default function SignupPage() {
     name: '',
     surname: '',
     email: '',
+    confirmEmail: '',
     username: '',
     password: '',
     confirmPassword: ''
@@ -35,6 +36,12 @@ export default function SignupPage() {
     setLoading(true);
 
     // Validation
+    if (formData.email !== formData.confirmEmail) {
+      setError(t.emailMismatch || 'Les emails ne correspondent pas');
+      setLoading(false);
+      return;
+    }
+
     if (formData.password !== formData.confirmPassword) {
       setError(t.passwordMismatch);
       setLoading(false);
@@ -243,6 +250,36 @@ export default function SignupPage() {
               type="email"
               name="email"
               value={formData.email}
+              onChange={handleChange}
+              required
+              style={{
+                width: '100%',
+                padding: windowWidth <= 1000 ? '12px' : '14px',
+                background: 'rgba(40,40,40,0.8)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                borderRadius: windowWidth <= 1000 ? '8px' : '10px',
+                color: 'white',
+                fontSize: windowWidth <= 1000 ? '13px' : '14px',
+                outline: 'none',
+                boxSizing: 'border-box'
+              }}
+            />
+          </div>
+
+          <div style={{ marginBottom: windowWidth <= 1000 ? '15px' : '20px' }}>
+            <label style={{ 
+              display: 'block', 
+              marginBottom: windowWidth <= 1000 ? '8px' : '10px', 
+              color: '#bbb', 
+              fontWeight: '500',
+              fontSize: windowWidth <= 1000 ? '13px' : '14px'
+            }}>
+              {t.confirmEmail} {t.confirmEmail ? <span style={{ color: '#EF4444' }}>*</span> : ''} 
+            </label>
+            <input
+              type="email"
+              name="confirmEmail"
+              value={formData.confirmEmail}
               onChange={handleChange}
               required
               style={{
