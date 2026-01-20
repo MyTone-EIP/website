@@ -1,12 +1,12 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/contexts/translations';
 import LanguageSelector from '@/components/LanguageSelector';
 
-export default function ResetPasswordPage() {
+function ResetPasswordContent() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [message, setMessage] = useState('');
@@ -330,3 +330,47 @@ export default function ResetPasswordPage() {
     </div>
   );
 }
+
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={<LoadingFallback />}>
+      <ResetPasswordContent />
+    </Suspense>
+  );
+}
+
+function LoadingFallback() {
+  return (
+    <div style={{ 
+      minHeight: '100vh', 
+      background: '#0a0a0a', 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center',
+      fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
+    }}>
+      <div style={{
+        background: 'rgba(20,20,20,0.8)',
+        backdropFilter: 'blur(20px)',
+        padding: '50px',
+        borderRadius: '24px',
+        border: '1px solid rgba(98,0,238,0.2)',
+        width: '100%',
+        maxWidth: '500px',
+        textAlign: 'center'
+      }}>
+        <div style={{
+          fontSize: '36px',
+          fontWeight: '700',
+          background: 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text',
+          marginBottom: '10px'
+        }}>
+          MyTone
+        </div>
+        <p style={{ color: '#888', margin: 0, fontSize: '14px' }}>Chargement...</p>
+      </div>
+    </div>
+  );
