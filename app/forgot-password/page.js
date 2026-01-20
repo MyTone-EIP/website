@@ -35,16 +35,19 @@ export default function ForgotPasswordPage() {
         body: JSON.stringify({ email }),
       });
 
-      const data = await response.json();
-
       if (response.ok) {
-        setMessage(data.message || t.resetEmailSent || 'Un email de réinitialisation a été envoyé à votre adresse.');
+        setMessage(t.resetEmailSent);
         setEmail('');
       } else {
-        setError(data.error || t.resetError || 'Une erreur est survenue.');
+        let errorMsg = t.resetError
+        try {
+          const data = await response.json();
+          errorMsg = data.error || errorMsg;
+        } catch {}
+        setError(errorMsg)
       }
     } catch (err) {
-      setError(t.serverError || 'Erreur serveur');
+      setError(t.serverError);
     } finally {
       setLoading(false);
     }
