@@ -16,11 +16,11 @@ export async function POST(request) {
 
     const userData = {
       name,
-      sername,
+      surname,
       email,
       username,
       password,
-      phone_number: phone_number || null,
+      phone_number: null,
       type_client: 0,
     };
 
