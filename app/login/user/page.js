@@ -176,8 +176,8 @@ export default function UserLoginPage() {
               onFocus={(e) => e.target.style.borderColor = 'rgba(98,0,238,0.5)'}
               onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
             />
-            <a 
-              href="/resetpwd" 
+            <a
+              href="/forgot-password" 
               style={{ 
                 color: '#b187d3',
                 textDecoration: 'underline',

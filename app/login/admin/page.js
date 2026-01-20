@@ -177,7 +177,7 @@ export default function AdminLoginPage() {
               onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
             />
             <a 
-              href="/resetpwd" 
+              href="/forgot-password" 
               style={{ 
                 color: '#b187d3',
                 textDecoration: 'underline',
