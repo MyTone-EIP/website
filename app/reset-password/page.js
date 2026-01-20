@@ -1,7 +1,7 @@
 'use client';
 
-import { useState, useEffect, useSearchParams } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/contexts/translations';
 import LanguageSelector from '@/components/LanguageSelector';
