@@ -146,9 +146,40 @@ export default function Home() {
             
             {session ? (
               <>
-                <span style={{ color: '#888', fontSize: '13px', whiteSpace: 'nowrap' }}>
+                <button
+                  onClick={() => {
+                    if (session.user?.role === 'admin') {
+                      router.push('/admin');
+                    }
+                  }}
+                  style={{
+                    color: session.user?.role === 'admin' ? '#6200EE' : '#888',
+                    fontSize: '13px',
+                    whiteSpace: 'nowrap',
+                    background: 'none',
+                    border: 'none',
+                    cursor: session.user?.role === 'admin' ? 'pointer' : 'default',
+                    fontWeight: session.user?.role === 'admin' ? '600' : '400',
+                    transition: 'all 0.2s',
+                    padding: '4px 8px',
+                    borderRadius: '6px'
+                  }}
+                  onMouseOver={(e) => {
+                    if (session.user?.role === 'admin') {
+                      e.target.style.background = 'rgba(98,0,238,0.1)';
+                      e.target.style.color = '#9D4EDD';
+                    }
+                  }}
+                  onMouseOut={(e) => {
+                    if (session.user?.role === 'admin') {
+                      e.target.style.background = 'none';
+                      e.target.style.color = '#6200EE';
+                    }
+                  }}
+                  title={session.user?.role === 'admin' ? 'Accéder au panneau d\'administration' : ''}
+                >
                   👤 {session.user.name || session.user.email}
-                </span>
+                </button>
                 <button
                   onClick={() => signOut({ callbackUrl: '/' })}
                   style={{
@@ -290,9 +321,30 @@ export default function Home() {
           {/* Auth Buttons */}
           {session ? (
             <>
-              <span style={{ color: '#888', fontSize: '13px', textAlign: 'center' }}>
+              <button
+                onClick={() => {
+                  if (session.user?.role === 'admin') {
+                    router.push('/admin');
+                    setMobileMenuOpen(false);
+                  }
+                }}
+                style={{
+                  color: session.user?.role === 'admin' ? '#6200EE' : '#888',
+                  fontSize: '13px',
+                  background: 'none',
+                  border: 'none',
+                  cursor: session.user?.role === 'admin' ? 'pointer' : 'default',
+                  fontWeight: session.user?.role === 'admin' ? '600' : '400',
+                  transition: 'all 0.2s',
+                  padding: '6px 8px',
+                  borderRadius: '6px',
+                  width: '100%',
+                  textAlign: 'center'
+                }}
+                title={session.user?.role === 'admin' ? 'Accéder au panneau d\'administration' : ''}
+              >
                 👤 {session.user.name || session.user.email}
-              </span>
+              </button>
               <button
                 onClick={() => {
                   signOut({ callbackUrl: '/' });
