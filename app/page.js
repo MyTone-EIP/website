@@ -177,7 +177,6 @@ export default function Home() {
                     }
                   }}
                   title={session.user?.role === 'admin' ? 'Accéder au panneau d\'administration' : ''}
-                >
                   👤 {session.user.name || session.user.email}
                 </button>
                 <button
