@@ -387,7 +387,7 @@ export default function Home() {
 
         <div style={{
           // display: 'inline-block',
-          padding: '8px 20px',
+          padding: '8px 55px',
           marginBottom: '30px',
           fontSize: windowWidth <= 1000 ? '25px' : '34px',
           fontWeight: '600',
