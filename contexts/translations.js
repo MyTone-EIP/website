@@ -50,6 +50,8 @@ export const translations = {
     footerSlogan: 'Transformez votre voix en musique. Vos idées en chansons.',
     footerCopyright: '© 2025 MyTone - Projet EIP',
     
+    back: 'Retour',
+
     // Login & Signup
     login: 'Connexion',
     signup: 'S\'inscrire',
@@ -193,6 +195,8 @@ export const translations = {
     footerSlogan: 'Turn voice into music. Ideas into songs.',
     footerCopyright: '© 2025 MyTone - Project EIP',
     
+    back: 'Back',      
+
     login: 'Login',
     signup: 'Sign Up',
     loginUser: 'User Login',
@@ -312,6 +316,8 @@ export const translations = {
     footerSlogan: 'Convierte tu voz en música. Ideas en canciones.',
     footerCopyright: '© 2025 MyTone - Proyecto EIP',
     
+    back: 'Atrás',
+
     login: 'Iniciar sesión',
     signup: 'Registrarse',
     loginUser: 'Inicio de sesión de usuario',
@@ -431,6 +437,8 @@ export const translations = {
     apkNotAvailable: 'APK non disponibile al momento',
     downloadError: 'Errore durante il download',
     
+    back: 'Indietro',
+
     // Placeholders
     emailUsernamePlaceholder: 'user@email.com o username',
     usernamePlaceholder: 'admin',
@@ -561,6 +569,8 @@ export const translations = {
     downloadTip: 'Aktivieren Sie die Installation aus unbekannten Quellen in Ihren Einstellungen',
     apkNotAvailable: 'APK derzeit nicht verfügbar',
     downloadError: 'Fehler beim Herunterladen',
+    
+    back: 'Zurück',
     
     // Placeholders
     emailUsernamePlaceholder: 'user@email.com oder benutzername',
@@ -693,6 +703,8 @@ export const translations = {
     apkNotAvailable: 'APK 目前不可用',
     downloadError: '下载错误',
     
+    back: '后退',
+
     // Placeholders
     emailUsernamePlaceholder: 'user@email.com 或用户名',
     usernamePlaceholder: 'admin',
