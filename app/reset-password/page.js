@@ -44,38 +44,31 @@ function ResetPasswordContent() {
       return;
     }
 
-    if (password.length < 6) {
+    if (password.length < 10) {
       setError(t.passwordTooShort || 'Le mot de passe doit contenir au moins 6 caractères');
       setLoading(false);
       return;
     }
 
-    try {
-      const response = await fetch('/api/reset-password', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ 
-          token,
-          password
-        }),
-      });
+    const response = await fetch('/api/reset-password', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        token,
+        password: password
+      }),
+    });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setMessage(data.message || t.passwordResetSuccess || 'Votre mot de passe a été réinitialisé avec succès');
-        setTimeout(() => {
-          router.push('/login/user');
-        }, 2000);
-      } else {
-        setError(data.error || t.resetError || 'Une erreur est survenue');
-      }
-    } catch (err) {
-      setError(t.serverError || 'Erreur serveur');
-    } finally {
-      setLoading(false);
+    if (response.ok) {
+      setMessage(t.passwordResetSuccess || 'Votre mot de passe a été réinitialisé avec succès');
+      setTimeout(() => {
+        router.push('/login/user');
+      }, 2000);
+    } else {
+      const data = await response.json().catch(() => ({}));
+      setError(data.error || t.resetError || 'Une erreur est survenue');
     }
   };
 
