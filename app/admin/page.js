@@ -257,7 +257,7 @@ export default function AdminPage() {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
           <button
-            onClick={() => router.push('/')}
+            onClick={() => router.back()}
             style={{
               display: 'flex',
               alignItems: 'center',
