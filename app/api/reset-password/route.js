@@ -13,7 +13,7 @@ export async function POST(request) {
         },
         body: JSON.stringify({
           token: body.token,
-          password: body.password,
+          new_password: body.password,
         }),
       }
     );
