@@ -149,29 +149,6 @@ export default function Home() {
                 <button>
                   onClick={() => {
                     if (session.user?.role === 'admin') {
-                      router.push('/');
-                      setMobileMenuOpen(false);
-                    }
-                  }}
-                  style={{
-                    color: session.user?.role === 'admin' ? '#6200EE' : '#888',
-                    fontSize: '13px',
-                    background: 'none',
-                    border: 'none',
-                    cursor: session.user?.role === 'admin' ? 'pointer' : 'default',
-                    fontWeight: session.user?.role === 'admin' ? '600' : '400',
-                    transition: 'all 0.2s',
-                    padding: '6px 8px',
-                    borderRadius: '6px',
-                    width: '100%',
-                    textAlign: 'center'
-                  }}
-                  title={session.user?.role === 'admin' ? 'Accéder au panneau d\'administration' : ''}
-                </button>
-                {t.back}
-                <button
-                  onClick={() => {
-                    if (session.user?.role === 'admin') {
                       router.push('/admin');
                     }
                   }}

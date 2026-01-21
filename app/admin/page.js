@@ -255,15 +255,44 @@ export default function AdminPage() {
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
-        <div style={{
-          fontSize: '24px',
-          fontWeight: '700',
-          background: 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent',
-          backgroundClip: 'text'
-        }}>
-          MyTone Admin
+        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
+          <button
+            onClick={() => router.push('/')}
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '8px 12px',
+              background: 'rgba(98,0,238,0.1)',
+              color: '#9D4EDD',
+              border: '1px solid rgba(98,0,238,0.3)',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontSize: '13px',
+              fontWeight: '600',
+              transition: 'all 0.2s'
+            }}
+            onMouseOver={(e) => {
+              e.currentTarget.style.background = 'rgba(98,0,238,0.2)';
+              e.currentTarget.style.color = '#B388FF';
+            }}
+            onMouseOut={(e) => {
+              e.currentTarget.style.background = 'rgba(98,0,238,0.1)';
+              e.currentTarget.style.color = '#9D4EDD';
+            }}
+          >
+            ← {t.back}
+          </button>
+          <div style={{
+            fontSize: '24px',
+            fontWeight: '700',
+            background: 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text'
+          }}>
+            MyTone Admin
+          </div>
         </div>
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
           <LanguageSelector />
