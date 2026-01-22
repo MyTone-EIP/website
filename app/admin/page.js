@@ -148,7 +148,6 @@ export default function AdminPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
-  const [backButtonHovered, setBackButtonHovered] = useState(false);
   const [message, setMessage] = useState('');
   const [news, setNews] = useState([]);
   const [activeTab, setActiveTab] = useState('news'); // 'news' ou 'apk'
@@ -256,40 +255,15 @@ export default function AdminPage() {
         justifyContent: 'space-between',
         alignItems: 'center'
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <button
-            onClick={() => {
-              router.push('/');
-            }}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '8px',
-              padding: '8px 12px',
-              background: backButtonHovered ? 'rgba(98,0,238,0.2)' : 'rgba(98,0,238,0.1)',
-              color: backButtonHovered ? '#B388FF' : '#9D4EDD',
-              border: '1px solid rgba(98,0,238,0.3)',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              fontSize: '13px',
-              fontWeight: '600',
-              transition: 'all 0.2s'
-            }}
-            onMouseEnter={() => setBackButtonHovered(true)}
-            onMouseLeave={() => setBackButtonHovered(false)}
-          >
-            {t.back}
-          </button>
-          <div style={{
-            fontSize: '24px',
-            fontWeight: '700',
-            background: 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text'
-          }}>
-            MyTone Admin
-          </div>
+        <div style={{
+          fontSize: '24px',
+          fontWeight: '700',
+          background: 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent',
+          backgroundClip: 'text'
+        }}>
+          MyTone Admin
         </div>
         <div style={{ display: 'flex', gap: '20px', alignItems: 'center' }}>
           <LanguageSelector />
