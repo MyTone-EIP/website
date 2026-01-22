@@ -257,9 +257,12 @@ export default function AdminPage() {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
           <button
-            onClick={() => {
-              if (typeof window !== 'undefined') {
-                window.history.back();
+            onClick={async () => {
+              try {
+                await router.push('/');
+              } catch (err) {
+                console.error('Navigation error:', err);
+                window.location.href = '/';
               }
             }}
             style={{
