@@ -148,6 +148,7 @@ export default function AdminPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [backButtonHovered, setBackButtonHovered] = useState(false);
   const [message, setMessage] = useState('');
   const [news, setNews] = useState([]);
   const [activeTab, setActiveTab] = useState('news'); // 'news' ou 'apk'
@@ -257,21 +258,16 @@ export default function AdminPage() {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
           <button
-            onClick={async () => {
-              try {
-                await router.push('/');
-              } catch (err) {
-                console.error('Navigation error:', err);
-                window.location.href = '/';
-              }
+            onClick={() => {
+              router.push('/');
             }}
             style={{
               display: 'flex',
               alignItems: 'center',
               gap: '8px',
               padding: '8px 12px',
-              background: 'rgba(98,0,238,0.1)',
-              color: '#9D4EDD',
+              background: backButtonHovered ? 'rgba(98,0,238,0.2)' : 'rgba(98,0,238,0.1)',
+              color: backButtonHovered ? '#B388FF' : '#9D4EDD',
               border: '1px solid rgba(98,0,238,0.3)',
               borderRadius: '8px',
               cursor: 'pointer',
@@ -279,14 +275,8 @@ export default function AdminPage() {
               fontWeight: '600',
               transition: 'all 0.2s'
             }}
-            onMouseOver={(e) => {
-              e.currentTarget.style.background = 'rgba(98,0,238,0.2)';
-              e.currentTarget.style.color = '#B388FF';
-            }}
-            onMouseOut={(e) => {
-              e.currentTarget.style.background = 'rgba(98,0,238,0.1)';
-              e.currentTarget.style.color = '#9D4EDD';
-            }}
+            onMouseEnter={() => setBackButtonHovered(true)}
+            onMouseLeave={() => setBackButtonHovered(false)}
           >
             {t.back}
           </button>
