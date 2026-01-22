@@ -257,7 +257,11 @@ export default function AdminPage() {
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
           <button
-            onClick={() => router.back()}
+            onClick={() => {
+              if (typeof window !== 'undefined') {
+                window.history.back();
+              }
+            }}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -281,7 +285,7 @@ export default function AdminPage() {
               e.currentTarget.style.color = '#9D4EDD';
             }}
           >
-            ← {t.back}
+            {t.back}
           </button>
           <div style={{
             fontSize: '24px',
