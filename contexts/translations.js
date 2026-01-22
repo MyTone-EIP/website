@@ -569,7 +569,6 @@ export const translations = {
     downloadTip: 'Aktivieren Sie die Installation aus unbekannten Quellen in Ihren Einstellungen',
     apkNotAvailable: 'APK derzeit nicht verfügbar',
     downloadError: 'Fehler beim Herunterladen',
-    
     back: 'Zurück',
     
     // Placeholders
