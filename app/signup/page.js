@@ -26,6 +26,8 @@ export default function SignupPage() {
   const { currentLanguage, isClient } = useLanguage();
   const t = translations[currentLanguage] || translations.fr;
 
+  console.log('Translations object for current language:', t);
+
   // Attendre que le client soit chargé
   if (!isClient) {
     return (
