@@ -191,6 +191,7 @@ export default function SignupPage() {
             MyTone
           </div>
           <p style={{ color: '#888', margin: 0, fontSize: windowWidth <= 1000 ? '13px' : '14px' }}>
+            {console.log('t.signupTitle:', t.signupTitle)}
             {t.signupTitle}
           </p>
         </div>
@@ -206,6 +207,7 @@ export default function SignupPage() {
             fontSize: windowWidth <= 1000 ? '12px' : '14px',
             textAlign: 'center'
           }}>
+            {console.log('error (translation key):', error)}
             {error}
           </div>
         )}
@@ -220,6 +222,7 @@ export default function SignupPage() {
                 fontWeight: '500',
                 fontSize: windowWidth <= 1000 ? '13px' : '14px'
               }}>
+                {console.log('t.name:', t.name)}
                 {t.name} <span style={{ color: '#EF4444' }}>*</span>
               </label>
               <input
@@ -249,6 +252,7 @@ export default function SignupPage() {
                 fontWeight: '500',
                 fontSize: windowWidth <= 1000 ? '13px' : '14px'
               }}>
+                {console.log('t.surname:', t.surname)}
                 {t.surname} <span style={{ color: '#EF4444' }}>*</span>
               </label>
               <input
@@ -280,6 +284,7 @@ export default function SignupPage() {
               fontWeight: '500',
               fontSize: windowWidth <= 1000 ? '13px' : '14px'
             }}>
+              {console.log('t.email:', t.email)}
               {t.email} <span style={{ color: '#EF4444' }}>*</span>
             </label>
             <input
@@ -310,6 +315,7 @@ export default function SignupPage() {
               fontWeight: '500',
               fontSize: windowWidth <= 1000 ? '13px' : '14px'
             }}>
+              {console.log('t.confirmEmail:', t.confirmEmail)}
               {t.confirmEmail || 'Confirmer l\'email'} <span style={{ color: '#EF4444' }}>*</span>
             </label>
             <input
@@ -340,6 +346,7 @@ export default function SignupPage() {
               fontWeight: '500',
               fontSize: windowWidth <= 1000 ? '13px' : '14px'
             }}>
+              {console.log('t.username:', t.username)}
               {t.username} <span style={{ color: '#EF4444' }}>*</span>
             </label>
             <input
@@ -370,6 +377,7 @@ export default function SignupPage() {
               fontWeight: '500',
               fontSize: windowWidth <= 1000 ? '13px' : '14px'
             }}>
+              {console.log('t.password:', t.password)}
               {t.password} <span style={{ color: '#EF4444' }}>*</span>
             </label>
             <div style={{ position: 'relative' }}>
@@ -424,6 +432,7 @@ export default function SignupPage() {
               fontWeight: '500',
               fontSize: windowWidth <= 1000 ? '13px' : '14px'
             }}>
+              {console.log('t.confirmPassword:', t.confirmPassword)}
               {t.confirmPassword} <span style={{ color: '#EF4444' }}>*</span>
             </label>
             <div style={{ position: 'relative' }}>
@@ -471,7 +480,9 @@ export default function SignupPage() {
           </div>
 
           <p style={{ color: '#888', fontSize: windowWidth <= 1000 ? '12px' : '13px', marginBottom: windowWidth <= 1000 ? '15px' : '20px', marginTop: '10px' }}>
-            <span style={{ color: '#EF4444' }}>*</span> {t.requiredFields}
+            <span style={{ color: '#EF4444' }}>*</span> 
+            {console.log('t.requiredFields:', t.requiredFields)}
+            {t.requiredFields}
           </p>
 
           <button
@@ -491,6 +502,7 @@ export default function SignupPage() {
               boxShadow: loading ? 'none' : '0 4px 15px rgba(98,0,238,0.3)'
             }}
           >
+            {console.log('loading ? t.signingUp : t.signupButton:', loading ? t.signingUp : t.signupButton)}
             {loading ? t.signingUp : t.signupButton}
           </button>
         </form>
@@ -505,6 +517,7 @@ export default function SignupPage() {
               fontWeight: '500'
             }}
           >
+            {console.log('t.backToHome:', t.backToHome)}
             {t.backToHome}
           </a>
           <a 
@@ -515,6 +528,7 @@ export default function SignupPage() {
               fontSize: windowWidth <= 1000 ? '13px' : '14px'
             }}
           >
+            {console.log('t.alreadyHaveAccount:', t.alreadyHaveAccount)}
             {t.alreadyHaveAccount}
           </a>
         </div>
