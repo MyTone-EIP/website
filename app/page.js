@@ -179,6 +179,10 @@ export default function Home() {
                   title={session.user?.role === 'admin' ? 'Accéder au panneau d\'administration' : ''}
                   👤 {session.user.name || session.user.email}
                 </button>
+                { console.log(session.user?.role) }
+                { console.log(session.user?.name) }
+                { console.log(session.user?.username) }
+
                 <button
                   onClick={() => signOut({ callbackUrl: '/' })}
                   style={{
