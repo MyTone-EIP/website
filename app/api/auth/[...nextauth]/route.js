@@ -31,8 +31,20 @@ export const authOptions = {
           });
 
           if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.detail || "Identifiant ou mot de passe incorrect");
+            let errorMessage = "Identifiant ou mot de passe incorrect";
+            try {
+              const error = await response.json();
+              if (error.detail) {
+                errorMessage = Array.isArray(error.detail) 
+                  ? (error.detail[0]?.msg || error.detail[0]) 
+                  : error.detail;
+              } else if (error.error) {
+                errorMessage = error.error;
+              }
+            } catch (e) {
+              console.error("Erreur lors du parsing:", e);
+            }
+            throw new Error(errorMessage);
           }
 
           const data = await response.json();

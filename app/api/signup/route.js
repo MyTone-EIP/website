@@ -33,69 +33,35 @@ export async function POST(request) {
       body: JSON.stringify(userData),
     });
 
-    const result = await res.json()
-
     if(!res.ok) {
+      let errorMessage = "Erreur lors de l'inscription";
+      try {
+        const result = await res.json();
+        
+        // Gérer différents formats d'erreur du backend
+        if (result.detail) {
+          if (Array.isArray(result.detail)) {
+            errorMessage = result.detail[0]?.msg || result.detail[0] || "Erreur";
+          } else if (typeof result.detail === 'string') {
+            errorMessage = result.detail;
+          }
+        } else if (result.error) {
+          errorMessage = result.error;
+        }
+      } catch (e) {
+        // Si le parsing JSON échoue, utiliser un message générique
+        console.error("Erreur lors du parsing de la réponse:", e);
+      }
+      
       return NextResponse.json(
-        { error: result.detail?.[0]?.msg || result.error},
+        { error: errorMessage },
         { status: res.status }
       );
     }
 
-    // // Vérifier si l'email existe déjà
-    // const existingEmail = await sql`
-    //   SELECT id FROM "USERS" WHERE email = ${email} LIMIT 1
-    // `;
+    const result = await res.json()
 
-    // if (existingEmail.length > 0) {
-    //   return NextResponse.json(
-    //     { error: 'Cet email est déjà utilisé' },
-    //     { status: 400 }
-    //   );
-    // }
-
-    // // Vérifier si le username existe déjà
-    // const existingUsername = await sql`
-    //   SELECT id FROM "USERS" WHERE username = ${username} LIMIT 1
-    // `;
-
-    // if (existingUsername.length > 0) {
-    //   return NextResponse.json(
-    //     { error: 'Ce nom d\'utilisateur est déjà pris' },
-    //     { status: 400 }
-    //   );
-    // }
-
-    // // Hasher le mot de passe
-    // const hashedPassword = await bcrypt.hash(password, 10);
-
-    // // Créer l'utilisateur
-    // const result = await sql`
-    //   INSERT INTO "USERS" (
-    //     name, 
-    //     surname, 
-    //     email, 
-    //     username, 
-    //     password, 
-    //     created_at, 
-    //     phone_number, 
-    //     subscription_status, 
-    //     start_date_premium
-    //   )
-    //   VALUES (
-    //     ${name},
-    //     ${surname},
-    //     ${email},
-    //     ${username},
-    //     ${hashedPassword},
-    //     NOW(),
-    //     NULL,
-    //     NULL,
-    //     NULL
-    //   )
-    //   RETURNING id, name, surname, email, username, created_at
-    // `;
-
+    // Retourner la réponse du backend
     return NextResponse.json(result, { status: 201 });
 
   } catch (error) {
