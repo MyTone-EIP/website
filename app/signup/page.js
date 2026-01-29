@@ -114,7 +114,7 @@ export default function SignupPage() {
         
         console.log('Login result:', loginResult);
         if (!loginResult?.error) {
-          router.push('/');
+          //router.push('/');
           router.refresh();
         } else {
           router.push('/');
