@@ -87,9 +87,23 @@ export default function SignupPage() {
         }),
       });
 
-      const data = await response.json();
+      console.log('Signup response status:', response.status);
+      console.log('Signup response headers:', response.headers);
+
+      let data;
+      try {
+        data = await response.json();
+        console.log('Signup response data:', data);
+      } catch (parseError) {
+        console.error('Failed to parse response as JSON:', parseError);
+        const text = await response.text();
+        console.error('Response text:', text);
+        setError('Erreur serveur: réponse invalide');
+        return;
+      }
 
       if (response.ok) {
+        console.log('Signup successful, data:', data);
         // Connexion automatique après inscription
         const loginResult = await signIn('credentials', {
           redirect: false,
@@ -98,6 +112,7 @@ export default function SignupPage() {
           userType: 'user'
         });
         
+        console.log('Login result:', loginResult);
         if (!loginResult?.error) {
           router.push('/');
           router.refresh();
@@ -108,6 +123,7 @@ export default function SignupPage() {
         setError(data.error || t.signupError);
       }
     } catch (err) {
+      console.error('Signup error:', err);
       setError(t.serverError);
     } finally {
       setLoading(false);
