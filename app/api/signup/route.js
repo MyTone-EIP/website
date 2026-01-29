@@ -96,13 +96,7 @@ export async function POST(request) {
     //   RETURNING id, name, surname, email, username, created_at
     // `;
 
-    return NextResponse.json(
-      { 
-        message: 'Compte créé avec succès',
-        user: result.user,
-      },
-      { status: 201 }
-    );
+    return NextResponse.json(result, { status: 201 });
 
   } catch (error) {
     console.error('Erreur lors de l\'inscription:', error);
