@@ -12,6 +12,7 @@ export default function AdminLoginPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [focusedField, setFocusedField] = useState(null);
   const router = useRouter();
   const { currentLanguage, isClient } = useLanguage();
   const t = translations[currentLanguage] || translations.fr;
@@ -135,7 +136,7 @@ export default function AdminLoginPage() {
                 width: '100%',
                 padding: '14px',
                 background: 'rgba(30,30,30,0.8)',
-                border: '1px solid rgba(255,255,255,0.1)',
+                border: focusedField === 'username' ? '1px solid rgba(98,0,238,0.5)' : '1px solid rgba(255,255,255,0.1)',
                 borderRadius: '12px',
                 fontSize: '15px',
                 boxSizing: 'border-box',
@@ -144,8 +145,8 @@ export default function AdminLoginPage() {
                 transition: 'border-color 0.3s'
               }}
               placeholder={t.usernamePlaceholder}
-              onFocus={(e) => e.target.style.borderColor = 'rgba(98,0,238,0.5)'}
-              onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
+              onFocus={() => setFocusedField('username')}
+              onBlur={() => setFocusedField(null)}
             />
           </div>
 
@@ -168,7 +169,7 @@ export default function AdminLoginPage() {
                 width: '100%',
                 padding: '14px',
                 background: 'rgba(30,30,30,0.8)',
-                border: '1px solid rgba(255,255,255,0.1)',
+                border: focusedField === 'password' ? '1px solid rgba(98,0,238,0.5)' : '1px solid rgba(255,255,255,0.1)',
                 borderRadius: '12px',
                 fontSize: '15px',
                 boxSizing: 'border-box',
@@ -177,8 +178,8 @@ export default function AdminLoginPage() {
                 transition: 'border-color 0.3s'
               }}
               placeholder={t.passwordPlaceholder}
-              onFocus={(e) => e.target.style.borderColor = 'rgba(98,0,238,0.5)'}
-              onBlur={(e) => e.target.style.borderColor = 'rgba(255,255,255,0.1)'}
+              onFocus={() => setFocusedField('password')}
+              onBlur={() => setFocusedField(null)}
             />
             <a 
               href="/forgot-password" 
