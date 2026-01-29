@@ -6,6 +6,7 @@ import { signIn } from 'next-auth/react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/contexts/translations';
 import LanguageSelector from '@/components/LanguageSelector';
+import { getAdminByUsername } from '@/lib/db';
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
@@ -115,7 +116,12 @@ export default function SignupPage() {
         console.log('Login result:', loginResult);
         if (!loginResult?.error) {
           console.log('Login successful, redirecting to home... oui');
-          //router.push('/');
+          const admin = await getAdminByUsername(formData.username);
+          if (admin) {
+            router.push('/admin');
+          } else {
+            router.push('/');
+          }
           router.refresh();
         } else {
           console.log('Login successful, redirecting to home... pas');
