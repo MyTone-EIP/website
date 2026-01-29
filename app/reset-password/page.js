@@ -16,8 +16,12 @@ function ResetPasswordContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const token = searchParams.get('token');
-  const { currentLanguage } = useLanguage();
-  const t = translations[currentLanguage];
+  const { currentLanguage, isClient } = useLanguage();
+  const t = translations[currentLanguage] || translations.fr;
+
+  if (!isClient) {
+    return <div style={{ minHeight: '100vh', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>Chargement...</div>;
+  }
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);

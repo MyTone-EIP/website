@@ -23,8 +23,24 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
-  const { currentLanguage } = useLanguage();
+  const { currentLanguage, isClient } = useLanguage();
   const t = translations[currentLanguage] || translations.fr;
+
+  // Attendre que le client soit chargé
+  if (!isClient) {
+    return (
+      <div style={{ 
+        minHeight: '100vh', 
+        background: '#0a0a0a', 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'center',
+        color: 'white'
+      }}>
+        Chargement...
+      </div>
+    );
+  }
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);

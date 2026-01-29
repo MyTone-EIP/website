@@ -13,8 +13,12 @@ export default function AdminLoginPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-  const { currentLanguage } = useLanguage();
-  const t = translations[currentLanguage];
+  const { currentLanguage, isClient } = useLanguage();
+  const t = translations[currentLanguage] || translations.fr;
+
+  if (!isClient) {
+    return <div style={{ minHeight: '100vh', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>Chargement...</div>;
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault();

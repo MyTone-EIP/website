@@ -17,8 +17,8 @@ export default function Home() {
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [featureScrollPos, setFeatureScrollPos] = useState(0);
-  const { currentLanguage } = useLanguage();
-  const t = translations[currentLanguage];
+  const { currentLanguage, isClient } = useLanguage();
+  const t = translations[currentLanguage] || translations.fr;
 
   useEffect(() => {
     fetchNews();

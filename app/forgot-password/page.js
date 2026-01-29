@@ -11,8 +11,12 @@ export default function ForgotPasswordPage() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 1200);
-  const { currentLanguage } = useLanguage();
-  const t = translations[currentLanguage];
+  const { currentLanguage, isClient } = useLanguage();
+  const t = translations[currentLanguage] || translations.fr;
+
+  if (!isClient) {
+    return <div style={{ minHeight: '100vh', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>Chargement...</div>;
+  }
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);

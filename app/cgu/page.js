@@ -5,8 +5,12 @@ import { translations } from '@/contexts/translations';
 import LanguageSelector from '@/components/LanguageSelector';
 
 export default function CGUPage() {
-  const { currentLanguage } = useLanguage();
-  const t = translations[currentLanguage];
+  const { currentLanguage, isClient } = useLanguage();
+  const t = translations[currentLanguage] || translations.fr;
+
+  if (!isClient) {
+    return <div style={{ minHeight: '100vh', background: '#0a0a0a', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white' }}>Chargement...</div>;
+  }
 
   return (
     <div style={{ minHeight: '100vh', background: '#0a0a0a', fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}>
