@@ -24,7 +24,7 @@ export default function SignupPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
   const { currentLanguage } = useLanguage();
-  const t = translations[currentLanguage];
+  const t = translations[currentLanguage] || translations.fr;
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -276,7 +276,7 @@ export default function SignupPage() {
               fontWeight: '500',
               fontSize: windowWidth <= 1000 ? '13px' : '14px'
             }}>
-              {t.confirmEmail} {t.confirmEmail ? <span style={{ color: '#EF4444' }}>*</span> : ''} 
+              {t.confirmEmail || 'Confirmer l\'email'} <span style={{ color: '#EF4444' }}>*</span>
             </label>
             <input
               type="email"
@@ -377,7 +377,7 @@ export default function SignupPage() {
                   fontSize: '18px'
                 }}
               >
-                {showPassword ? '👁️' : '👁️‍🗨️'}
+                {showPassword ? '👁' : '👁‍🗨'}
               </button>
             </div>
           </div>
@@ -431,7 +431,7 @@ export default function SignupPage() {
                   fontSize: '18px'
                 }}
               >
-                {showConfirmPassword ? '👁️' : '👁️‍🗨️'}
+                {showConfirmPassword ? '👁' : '👁‍🗨'}
               </button>
             </div>
           </div>

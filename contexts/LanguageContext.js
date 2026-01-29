@@ -15,22 +15,34 @@ export const languages = {
 
 export function LanguageProvider({ children }) {
   const [currentLanguage, setCurrentLanguage] = useState('fr');
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    setIsClient(true);
     // Récupérer la langue sauvegardée
-    const saved = localStorage.getItem('language');
-    if (saved && languages[saved]) {
-      setCurrentLanguage(saved);
+    try {
+      const saved = localStorage.getItem('language');
+      if (saved && languages[saved]) {
+        setCurrentLanguage(saved);
+      }
+    } catch (error) {
+      // localStorage peut être bloqué en navigation privée
+      console.warn('localStorage not available:', error);
     }
   }, []);
 
   const changeLanguage = (lang) => {
     setCurrentLanguage(lang);
-    localStorage.setItem('language', lang);
+    try {
+      localStorage.setItem('language', lang);
+    } catch (error) {
+      // localStorage peut être bloqué en navigation privée
+      console.warn('localStorage not available:', error);
+    }
   };
 
   return (
-    <LanguageContext.Provider value={{ currentLanguage, changeLanguage, languages }}>
+    <LanguageContext.Provider value={{ currentLanguage, changeLanguage, languages, isClient }}>
       {children}
     </LanguageContext.Provider>
   );
