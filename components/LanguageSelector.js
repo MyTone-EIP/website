@@ -24,14 +24,14 @@ export default function LanguageSelector() {
           gap: '8px',
           transition: 'all 0.3s'
         }}
-        onMouseOver={(e) => {
+        onMouseEnter={(e) => {
           e.currentTarget.style.background = 'rgba(255,255,255,0.1)';
         }}
-        onMouseOut={(e) => {
+        onMouseLeave={(e) => {
           e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
         }}
       >
-        <span style={{ fontSize: '20px' }}>{languages[currentLanguage].flag}</span>
+        <span style={{ fontSize: '20px' }}>{String(languages[currentLanguage].flag)}</span>
         <span style={{ fontSize: '14px' }}>▼</span>
       </button>
 
@@ -87,19 +87,19 @@ export default function LanguageSelector() {
                   transition: 'all 0.2s',
                   textAlign: 'left'
                 }}
-                onMouseOver={(e) => {
+                onMouseEnter={(e) => {
                   if (currentLanguage !== code) {
                     e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
                   }
                 }}
-                onMouseOut={(e) => {
+                onMouseLeave={(e) => {
                   if (currentLanguage !== code) {
                     e.currentTarget.style.background = 'transparent';
                   }
                 }}
               >
-                <span style={{ fontSize: '18px' }}>{flag}</span>
-                <span>{name}</span>
+                <span style={{ fontSize: '18px' }}>{String(flag)}</span>
+                <span>{String(name)}</span>
               </button>
             ))}
           </div>
