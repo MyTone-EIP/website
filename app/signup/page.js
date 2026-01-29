@@ -114,9 +114,11 @@ export default function SignupPage() {
         
         console.log('Login result:', loginResult);
         if (!loginResult?.error) {
+          console.log('Login successful, redirecting to home... oui');
           //router.push('/');
           router.refresh();
         } else {
+          console.log('Login successful, redirecting to home... pas');
           router.push('/');
         }
       } else {
