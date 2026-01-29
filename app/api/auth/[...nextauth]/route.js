@@ -8,6 +8,7 @@ export const authOptions = {
       credentials: {
         identifier: { label: "Email ou Username", type: "text" },
         password: { label: "Password", type: "password" },
+        userType: { label: "User Type", type: "text" }
       },
       async authorize(credentials) {
         if (!credentials?.identifier || !credentials?.password) {
@@ -15,16 +16,18 @@ export const authOptions = {
         }
 
         try {
+          // Préparer les données pour le backend avec URL encoding approprié
+          const params = new URLSearchParams();
+          params.append("username", credentials.identifier);
+          params.append("password", credentials.password);
+
           // Appel à l'API backend pour authentifier l'utilisateur
           const response = await fetch("https://api-mytone.onrender.com/auth/login", {
             method: "POST",
             headers: {
               "Content-Type": "application/x-www-form-urlencoded",
             },
-            body: new URLSearchParams({
-              username: credentials.identifier,
-              password: credentials.password,
-            }),
+            body: params.toString(), // URLSearchParams encode automatiquement les caractères spéciaux
           });
 
           if (!response.ok) {
@@ -57,6 +60,7 @@ export const authOptions = {
             refreshToken: data.refresh_token,
           };
         } catch (error) {
+          console.error("Auth error:", error);
           throw new Error(error.message || "Erreur d'authentification");
         }
       }
@@ -67,6 +71,8 @@ export const authOptions = {
       if (user) {
         token.id = user.id;
         token.username = user.username;
+        token.email = user.email;
+        token.name = user.name;
         token.accessToken = user.accessToken;
         token.refreshToken = user.refreshToken;
       }
@@ -76,6 +82,8 @@ export const authOptions = {
       if (token) {
         session.user.id = token.id;
         session.user.username = token.username;
+        session.user.email = token.email;
+        session.user.name = token.name;
         session.accessToken = token.accessToken;
         session.refreshToken = token.refreshToken;
       }
@@ -87,6 +95,7 @@ export const authOptions = {
   },
   session: {
     strategy: "jwt",
+    maxAge: 30 * 24 * 60 * 60, // 30 jours
   },
   secret: process.env.NEXTAUTH_SECRET,
 };
