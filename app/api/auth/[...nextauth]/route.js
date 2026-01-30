@@ -63,12 +63,14 @@ export const authOptions = {
 
           const user = await userResponse.json();
 
+          console.log(user);
+
           return {
             id: user.id,
             email: user.email || null,
             name: user.name || user.username,
             username: user.username || null,
-            role: 'ca grosse dronne de kiki', // Ajout du rôle
+            //role: 'ca grosse dronne de kiki', // Ajout du rôle
             accessToken: data.access_token,
             refreshToken: data.refresh_token,
           };
