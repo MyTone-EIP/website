@@ -6,7 +6,6 @@ import { signIn } from 'next-auth/react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { translations } from '@/contexts/translations';
 import LanguageSelector from '@/components/LanguageSelector';
-import { getAdminByUsername } from '@/lib/db';
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
@@ -24,24 +23,8 @@ export default function SignupPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const router = useRouter();
-  const { currentLanguage, isClient } = useLanguage();
-  const t = translations[currentLanguage] || translations.fr;
-
-  // Attendre que le client soit chargé
-  if (!isClient) {
-    return (
-      <div style={{ 
-        minHeight: '100vh', 
-        background: '#0a0a0a', 
-        display: 'flex', 
-        alignItems: 'center', 
-        justifyContent: 'center',
-        color: 'white'
-      }}>
-        Chargement...
-      </div>
-    );
-  }
+  const { currentLanguage } = useLanguage();
+  const t = translations[currentLanguage];
 
   useEffect(() => {
     const handleResize = () => setWindowWidth(window.innerWidth);
@@ -88,23 +71,9 @@ export default function SignupPage() {
         }),
       });
 
-      console.log('Signup response status:', response.status);
-      console.log('Signup response headers:', response.headers);
-
-      let data;
-      try {
-        data = await response.json();
-        console.log('Signup response data:', data);
-      } catch (parseError) {
-        console.error('Failed to parse response as JSON:', parseError);
-        const text = await response.text();
-        console.error('Response text:', text);
-        setError('Erreur serveur: réponse invalide');
-        return;
-      }
+      const data = await response.json();
 
       if (response.ok) {
-        console.log('Signup successful, data:', data);
         // Connexion automatique après inscription
         const loginResult = await signIn('credentials', {
           redirect: false,
@@ -113,24 +82,16 @@ export default function SignupPage() {
           userType: 'user'
         });
         
-        console.log('Login result:', loginResult);
         if (!loginResult?.error) {
-          console.log('Login successful, redirecting to home... oui');
-          const admin = await getAdminByUsername(formData.username);
           router.push('/');
           router.refresh();
         } else {
-          console.log('Login successful, redirecting to home... pas');
           router.push('/');
         }
       } else {
-        const errorMessage = typeof data.error === 'object' 
-          ? JSON.stringify(data.error) 
-          : data.error;
-        setError(errorMessage || t.signupError);
+        setError(data.error || t.signupError);
       }
     } catch (err) {
-      console.error('Signup error:', err);
       setError(t.serverError);
     } finally {
       setLoading(false);
@@ -315,7 +276,7 @@ export default function SignupPage() {
               fontWeight: '500',
               fontSize: windowWidth <= 1000 ? '13px' : '14px'
             }}>
-              {t.confirmEmail || 'Confirmer l\'email'} <span style={{ color: '#EF4444' }}>*</span>
+              {t.confirmEmail} {t.confirmEmail ? <span style={{ color: '#EF4444' }}>*</span> : ''} 
             </label>
             <input
               type="email"
@@ -416,7 +377,7 @@ export default function SignupPage() {
                   fontSize: '18px'
                 }}
               >
-                {showPassword ? '👁' : '👁‍🗨'}
+                {showPassword ? '👁️' : '👁️‍🗨️'}
               </button>
             </div>
           </div>
@@ -470,14 +431,13 @@ export default function SignupPage() {
                   fontSize: '18px'
                 }}
               >
-                {showConfirmPassword ? '👁' : '👁‍🗨'}
+                {showConfirmPassword ? '👁️' : '👁️‍🗨️'}
               </button>
             </div>
           </div>
 
           <p style={{ color: '#888', fontSize: windowWidth <= 1000 ? '12px' : '13px', marginBottom: windowWidth <= 1000 ? '15px' : '20px', marginTop: '10px' }}>
-            <span style={{ color: '#EF4444' }}>*</span> 
-            {t.requiredFields}
+            <span style={{ color: '#EF4444' }}>*</span> {t.requiredFields}
           </p>
 
           <button
