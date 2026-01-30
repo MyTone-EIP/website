@@ -117,11 +117,7 @@ export default function SignupPage() {
         if (!loginResult?.error) {
           console.log('Login successful, redirecting to home... oui');
           const admin = await getAdminByUsername(formData.username);
-          if (admin) {
-            router.push('/admin');
-          } else {
-            router.push('/');
-          }
+          router.push('/');
           router.refresh();
         } else {
           console.log('Login successful, redirecting to home... pas');

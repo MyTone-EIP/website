@@ -68,6 +68,7 @@ export const authOptions = {
             email: user.email || null,
             name: user.name || user.username,
             username: user.username || null,
+            role: 'ca grosse dronne de kiki', // Ajout du rôle
             accessToken: data.access_token,
             refreshToken: data.refresh_token,
           };
@@ -85,6 +86,7 @@ export const authOptions = {
         token.username = user.username;
         token.email = user.email;
         token.name = user.name;
+        token.role = user.role; // Ajout du rôle
         token.accessToken = user.accessToken;
         token.refreshToken = user.refreshToken;
       }
@@ -96,6 +98,7 @@ export const authOptions = {
         session.user.username = token.username;
         session.user.email = token.email;
         session.user.name = token.name;
+        session.user.role = token.role; // Ajout du rôle
         session.accessToken = token.accessToken;
         session.refreshToken = token.refreshToken;
       }

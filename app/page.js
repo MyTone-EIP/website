@@ -182,6 +182,7 @@ export default function Home() {
                 { console.log(session.user?.role) }
                 { console.log(session.user?.name) }
                 { console.log(session.user?.username) }
+                { console.log(session.user?.accessToken) }
 
                 <button
                   onClick={() => signOut({ callbackUrl: '/' })}
