@@ -71,6 +71,7 @@ export const authOptions = {
             email: user.email || null,
             name: user.name || user.username,
             username: user.username || null,
+            role: "admin",
             accessToken: data.access_token,
             refreshToken: data.refresh_token,
           };
