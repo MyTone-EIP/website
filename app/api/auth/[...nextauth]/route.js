@@ -1,5 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import { getUserByEmailOrUsername, getAdminByUsername } from "@/lib/db";
+import bcrypt from "bcrypt";
 
 export const authOptions = {
   providers: [
@@ -70,7 +72,7 @@ export const authOptions = {
             email: user.email || null,
             name: user.name || user.username,
             username: user.username || null,
-            //role: 'ca grosse dronne de kiki', // Ajout du rôle
+            role: 'admin', // Ajout du rôle
             accessToken: data.access_token,
             refreshToken: data.refresh_token,
           };
