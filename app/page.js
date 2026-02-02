@@ -140,6 +140,11 @@ export default function Home() {
                   <path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25v178.72A162.55 162.55 0 1 1 185 188.31v89.89a74.62 74.62 0 1 0 52.23 71.18V0h88a121.18 121.18 0 0 0 1.86 22.17A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14z" fill="#FFFFFF"/>
                 </svg>
               </a>
+              <a href="https://x.com/MytoneApp" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', transition: 'transform 0.2s' }} onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.15)')} onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26L22.5 21.75h-6.57l-5.145-6.73-5.89 6.73H1.586l7.73-8.835L1.5 2.25h6.735l4.655 6.116L18.244 2.25zM17.07 19.77h1.833L7.245 4.126H5.278L17.07 19.77z" fill="#FFFFFF"/>
+                </svg>
+              </a>
             </div>
 
             <LanguageSelector />
@@ -280,6 +285,11 @@ export default function Home() {
               <svg width="18" height="18" viewBox="0 0 448 512" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M448 209.91a210.06 210.06 0 0 1-122.77-39.25v178.72A162.55 162.55 0 1 1 185 188.31v89.89a74.62 74.62 0 1 0 52.23 71.18V0h88a121.18 121.18 0 0 0 1.86 22.17A122.18 122.18 0 0 0 381 102.39a121.43 121.43 0 0 0 67 20.14z" fill="#FFFFFF"/>
               </svg>
+            </a>
+            <a href="https://x.com/MytoneApp" target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', transition: 'transform 0.2s' }} onMouseOver={(e) => (e.currentTarget.style.transform = 'scale(1.15)')} onMouseOut={(e) => (e.currentTarget.style.transform = 'scale(1)')}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M18.244 2.25h3.308l-7.227 8.26L22.5 21.75h-6.57l-5.145-6.73-5.89 6.73H1.586l7.73-8.835L1.5 2.25h6.735l4.655 6.116L18.244 2.25zM17.07 19.77h1.833L7.245 4.126H5.278L17.07 19.77z" fill="#FFFFFF"/>
+                </svg>
             </a>
           {/* Language Selector in Mobile Menu */}
           <div style={{ display: 'flex', justifyContent: 'center', paddingBottom: '5px', paddingLeft: '150px'}}>
