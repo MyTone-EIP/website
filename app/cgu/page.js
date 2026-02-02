@@ -60,7 +60,7 @@ export default function CGUPage() {
       </nav>
 
       {/* Contenu principal */}
-      <div style={{ padding: '60px 40px', maxWidth: '1000px', margin: '0 auto' }}>
+      <div style={{ padding: '60px 40px', maxWidth: '500px', margin: '0 auto' }}>
         <div style={{
           background: 'rgba(20,20,20,0.6)',
           border: '1px solid rgba(98,0,238,0.2)',
@@ -70,7 +70,7 @@ export default function CGUPage() {
           <h1 style={{
             margin: '0 0 20px 0',
             color: 'white',
-            fontSize: '42px',
+            fontSize: '24px',
             fontWeight: '700',
             background: 'linear-gradient(135deg, #6200EE 0%, #9D4EDD 100%)',
             WebkitBackgroundClip: 'text',
@@ -87,7 +87,7 @@ export default function CGUPage() {
           <div style={{ color: '#ccc', lineHeight: '1.8', fontSize: '15px' }}>
             {/* Section 1 */}
             <section style={{ marginBottom: '40px' }}>
-              <h2 style={{ color: 'white', fontSize: '24px', fontWeight: '600', marginBottom: '15px' }}>
+              <h2 style={{ color: 'white', fontSize: '20px', fontWeight: '600', marginBottom: '15px' }}>
                 1. {t.cguSection1Title}
               </h2>
               <p style={{ marginBottom: '15px' }}>
@@ -97,7 +97,7 @@ export default function CGUPage() {
 
             {/* Section 2 */}
             <section style={{ marginBottom: '40px' }}>
-              <h2 style={{ color: 'white', fontSize: '24px', fontWeight: '600', marginBottom: '15px' }}>
+              <h2 style={{ color: 'white', fontSize: '20px', fontWeight: '600', marginBottom: '15px' }}>
                 2. {t.cguSection2Title}
               </h2>
               <p style={{ marginBottom: '15px' }}>
@@ -113,7 +113,7 @@ export default function CGUPage() {
 
             {/* Section 3 */}
             <section style={{ marginBottom: '40px' }}>
-              <h2 style={{ color: 'white', fontSize: '24px', fontWeight: '600', marginBottom: '15px' }}>
+              <h2 style={{ color: 'white', fontSize: '20px', fontWeight: '600', marginBottom: '15px' }}>
                 3. {t.cguSection3Title}
               </h2>
               <p style={{ marginBottom: '15px' }}>
@@ -123,7 +123,7 @@ export default function CGUPage() {
 
             {/* Section 4 */}
             <section style={{ marginBottom: '40px' }}>
-              <h2 style={{ color: 'white', fontSize: '24px', fontWeight: '600', marginBottom: '15px' }}>
+              <h2 style={{ color: 'white', fontSize: '20px', fontWeight: '600', marginBottom: '15px' }}>
                 4. {t.cguSection4Title}
               </h2>
               <p style={{ marginBottom: '15px' }}>
@@ -133,7 +133,7 @@ export default function CGUPage() {
 
             {/* Section 5 */}
             <section style={{ marginBottom: '40px' }}>
-              <h2 style={{ color: 'white', fontSize: '24px', fontWeight: '600', marginBottom: '15px' }}>
+              <h2 style={{ color: 'white', fontSize: '20px', fontWeight: '600', marginBottom: '15px' }}>
                 5. {t.cguSection5Title}
               </h2>
               <p style={{ marginBottom: '15px' }}>
@@ -143,7 +143,7 @@ export default function CGUPage() {
 
             {/* Section 6 */}
             <section style={{ marginBottom: '40px' }}>
-              <h2 style={{ color: 'white', fontSize: '24px', fontWeight: '600', marginBottom: '15px' }}>
+              <h2 style={{ color: 'white', fontSize: '20px', fontWeight: '600', marginBottom: '15px' }}>
                 6. {t.cguSection6Title}
               </h2>
               <p style={{ marginBottom: '15px' }}>
@@ -153,7 +153,7 @@ export default function CGUPage() {
 
             {/* Section 7 */}
             <section style={{ marginBottom: '40px' }}>
-              <h2 style={{ color: 'white', fontSize: '24px', fontWeight: '600', marginBottom: '15px' }}>
+              <h2 style={{ color: 'white', fontSize: '20px', fontWeight: '600', marginBottom: '15px' }}>
                 7. {t.cguSection7Title}
               </h2>
               <p style={{ marginBottom: '15px' }}>
@@ -163,7 +163,7 @@ export default function CGUPage() {
 
             {/* Section 8 */}
             <section style={{ marginBottom: '40px' }}>
-              <h2 style={{ color: 'white', fontSize: '24px', fontWeight: '600', marginBottom: '15px' }}>
+              <h2 style={{ color: 'white', fontSize: '20px', fontWeight: '600', marginBottom: '15px' }}>
                 8. {t.cguSection8Title}
               </h2>
               <p style={{ marginBottom: '15px' }}>
@@ -173,17 +173,17 @@ export default function CGUPage() {
 
             {/* Contact */}
             <section style={{
-              marginTop: '50px',
-              padding: '25px',
+              marginTop: '40px',
+              padding: '5px',
               background: 'rgba(98,0,238,0.1)',
               border: '1px solid rgba(98,0,238,0.3)',
-              borderRadius: '12px'
+              borderRadius: '10px'
             }}>
-              <h3 style={{ color: '#9D4EDD', fontSize: '18px', fontWeight: '600', marginBottom: '10px' }}>
+              <h3 style={{ color: '#9D4EDD', fontSize: '15px', fontWeight: '600', marginBottom: '5px' }}>
                 {t.cguContact}
               </h3>
               <p>
-                Email: <a href="mailto:contact@mytone.app" style={{ color: '#6200EE', textDecoration: 'none' }}>contact@mytone.app</a>
+                Email: <a href="mailto:contact@mytone.studio" style={{ color: '#6200EE', textDecoration: 'none' }}>contact@mytone.studio</a>
               </p>
             </section>
           </div>
